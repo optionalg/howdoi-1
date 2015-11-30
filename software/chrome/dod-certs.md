@@ -9,7 +9,7 @@ wget http://dodpki.c3pki.chamb.disa.mil/dodeca2.p7b
 wget http://dodpki.c3pki.chamb.disa.mil/rel3_dodroot_2048.p7b
 ```
 
-* Now get them into the actual store
+* Now get them into the actual store (requires libnss3-tools in Debian)
 ```
 for n in *.p7b; do certutil -d sql:$HOME/.pki/nssdb -A -t TC -n $n -i $n; done
 ```
@@ -17,7 +17,7 @@ for n in *.p7b; do certutil -d sql:$HOME/.pki/nssdb -A -t TC -n $n -i $n; done
 * The p7b files can be removed now from the 'temp' location
 
 #### Make the CAC reader available
-* Run this command (using the libfile for whatever you've setup, this will be using coolkey)
+* Run this command (using the libfile for whatever you've setup, this will be using coolkey in Debian), from $HOME
 ```
 modutil -dbdir sql:.pki/nssdb/ -add "CAC Module" -libfile /usr/lib/pkcs11/libcoolkeypk11.so 
 ```

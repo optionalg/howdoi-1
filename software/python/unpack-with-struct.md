@@ -22,7 +22,7 @@ The resulting tuple will have 4 entries that are basically this:
 So how does 'raymond   \x32\x12\x08\x01\x08' + '<10sHHb' do it?
 
 | Format Value | Description | Consumes | Value |
-|--------------|-------------|-------| |
+|--------------|-------------|----------|-------|
 | <	| Little endian | | |
 | 10s | 10 character string (10 bytes) | 'raymond   ' | 'raymond   ' |
 | H | unsigned short (2 bytes) | \x32\x12 | 4658 (hex: 0x1232) |

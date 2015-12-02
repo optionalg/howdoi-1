@@ -32,6 +32,7 @@ So how does 'raymond   \x32\x12\x08\x01\x08' + '<10sHHb' do it?
 
 #### Notes
 * Pad (throw-away) using 'x' (e.g. <10s3xi) - throw away 3 bytes in the middle of a 10 char string and an int
+* The length of the input to unpack MUST match the expected length from the format (from the above example, the input needs to be 15 bytes total)
 
 #### References:
 

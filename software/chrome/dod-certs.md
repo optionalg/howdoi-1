@@ -17,9 +17,11 @@ for n in *.p7b; do certutil -d sql:$HOME/.pki/nssdb -A -t TC -n $n -i $n; done
 * The p7b files can be removed now from the 'temp' location
 
 #### Make the CAC reader available
-* Run this command (using the libfile for whatever you've setup, this will be using coolkey in Debian), from $HOME
+* Run this command (using the libfile for whatever you've setup, this will be using coolkey in Debian, opensc in Arch), from $HOME
 ```
-modutil -dbdir sql:.pki/nssdb/ -add "CAC Module" -libfile /usr/lib/pkcs11/libcoolkeypk11.so 
+cd $HOME
+# use libcoolkeypk11.so for Debian
+modutil -dbdir sql:.pki/nssdb/ -add "CAC Module" -libfile /usr/lib/pkcs11/opensc-pkcs11.so 
 ```
 
 * Verify the CAC is loaded

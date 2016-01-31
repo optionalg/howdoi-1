@@ -6,7 +6,7 @@
 sudo pacman -Sc
 sudo pacman-key --refresh-keys
 
-sudo pacman -S alsa-utils chromium feh i3 i3lock i3status dmenu lxterminal p7zip pandoc pm-utils screen unzip wpa_supplicant xautolock xorg-xdm
+sudo pacman -S alsa-utils chromium feh i3 i3lock i3status dmenu lxterminal p7zip pandoc screen unzip wpa_supplicant xautolock xorg-xdm
 /sbin/reboot
 ```
 

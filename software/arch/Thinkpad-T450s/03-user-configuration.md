@@ -108,12 +108,6 @@ syncing --install
 ```
 
 ## Locking permissions
-```
-sudo visudo
----
-# Append this line to the end of visudo - /etc/sudoers
-enck ALL = NOPASSWD: /usr/sbin/pm-suspend-hybrid
-```
 
 Make a link
 ```

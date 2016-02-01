@@ -54,3 +54,8 @@ sudo pacman -S wget
 ```
 
 Follow instructions from [here](https://github.com/enckse/howdoi/blob/master/software/chrome/dod-certs.md)
+
+## File Management
+```
+sudo pacman -S xclip rox
+```

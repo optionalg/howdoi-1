@@ -57,5 +57,6 @@ Follow instructions from [here](https://github.com/enckse/howdoi/blob/master/sof
 
 ## File Management
 ```
-sudo pacman -S xclip rox
+# xclip for cli > clipboard, rox for basic fm, tree for output of image structure
+sudo pacman -S xclip rox tree
 ```

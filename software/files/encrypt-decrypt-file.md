@@ -18,3 +18,5 @@ gpg {name}.tar.gz.gpg
 
 tar xf {name}.tar.gz
 ```
+
+* Operations are different between gpg 1.4 and 2.* in respect to passphrase vs keyring use.

@@ -83,5 +83,5 @@ chown -R $USER:$USER .ssh/
 
 Make a quick reference guide as well
 ```
-ln -s /etc/profile.d/container.sh /usr/local/bin/info
+ln -s /etc/profile.d/container.sh /usr/local/bin/container-info
 ```

@@ -32,27 +32,16 @@ Port <number> # will be generated automatically at profile load
 
 ## Loading sshd at profile load
 ---
-Change ENABLE_SSHD=1 to enable per-container
+Use '--setenv INPUT_SSHD_PORT' to enable binding SSH to that port
 ```
 vim /etc/profile.d/container.sh
 ---
 #!/bin/bash
-ENABLE_SSHD=1
-
-if [ $ENABLE_SSHD -eq 1 ]; then
+if [ ! -z "$INPUT_SSHD_PORT" ]; then
     SSHD_FILE=/etc/ssh/sshd_config
-    SSHD_PORT_FILE=/var/opt/sshd_port
     ssh_pid=$(pidof sshd)
     if [ -z "$ssh_pid" ]; then
-        if [ ! -e $SSHD_PORT_FILE ]; then
-            ssh_port="$INPUT_SSHD_PORT"
-            if [ -z "$ssh_port" ]; then
-                ssh_port=$(shuf -i 2000-65000 -n 1)
-            fi
-            echo $ssh_port > $SSHD_PORT_FILE
-        fi
-
-        ssh_port=$(cat $SSHD_PORT_FILE)
+        ssh_port="$INPUT_SSHD_PORT"
         current_ssh_config=$(cat $SSHD_FILE | grep -v "^Port")
         echo "$current_ssh_config" > $SSHD_FILE
         echo "Port $ssh_port" >> $SSHD_FILE

@@ -37,7 +37,7 @@ Change ENABLE_SSHD=1 to enable per-container
 vim /etc/profile.d/container.sh
 ---
 #!/bin/bash
-ENABLE_SSHD=0
+ENABLE_SSHD=1
 
 if [ $ENABLE_SSHD -eq 1 ]; then
     SSHD_FILE=/etc/ssh/sshd_config
@@ -45,7 +45,10 @@ if [ $ENABLE_SSHD -eq 1 ]; then
     ssh_pid=$(pidof sshd)
     if [ -z "$ssh_pid" ]; then
         if [ ! -e $SSHD_PORT_FILE ]; then
-            ssh_port=$(shuf -i 2000-65000 -n 1)
+            ssh_port="$INPUT_SSHD_PORT"
+            if [ -z "$ssh_port" ]; then
+                ssh_port=$(shuf -i 2000-65000 -n 1)
+            fi
             echo $ssh_port > $SSHD_PORT_FILE
         fi
 
@@ -61,7 +64,6 @@ if [ $ENABLE_SSHD -eq 1 ]; then
     using_port=$(cat $SSHD_FILE | grep "^Port" | sed 's/Port //g')
     echo "ssh root@localhost -p $using_port"
 fi
-
 ```
 
 Make sure it is executable

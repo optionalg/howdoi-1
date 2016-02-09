@@ -86,6 +86,7 @@ git config --global push.default simple
 git config --global core.editor "vim"
 git config --global user.name "<name>"
 git config --global user.email "<email>"
+git config --global core.autocrlf input
 ```
 
 ## Make sure networking is set/utils available

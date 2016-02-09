@@ -27,7 +27,7 @@ ChallengeResponseAuthentication no
 UsePAM yes
 UsePrivilegeSeparation sandbox          # Default for new installations.
 Subsystem       sftp    /usr/lib/ssh/sftp-server
-Port 42042
+Port <number> # will be generated automatically at profile load 
 ```
 
 ## Loading sshd at profile load

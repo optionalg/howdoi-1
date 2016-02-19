@@ -23,7 +23,7 @@ mv opt/google/chrome/ /opt/google/
 
 * Setup the permissions
 ```
-sudo mv google-chrome-stable /usr/bin/google-chrome-stable
+sudo mv usr/bin/google-chrome-stable /usr/bin/google-chrome-stable
 sudo chown root:root /opt/google/chrome/chrome-sandbox
 sudo chmod 4755 /opt/google/chrome/chrome-sandbox
 ```

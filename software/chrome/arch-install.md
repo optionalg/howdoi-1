@@ -9,7 +9,6 @@ sudo pacman -S rpmextract
 * Extract the download rpm
 ```
 rpmextract <chrome>.rpm
-
 ```
 
 * Clean out the old version (if it exists)

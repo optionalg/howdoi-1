@@ -6,7 +6,11 @@
 sudo pacman -Sc
 sudo pacman-key --refresh-keys
 
-sudo pacman -S alsa-utils chromium feh i3 i3lock i3status dmenu gsfonts lxterminal p7zip pandoc screen ttf-liberation unzip wpa_supplicant xautolock xorg-xdm network-manager-applet cbatticon volumeicon
+sudo pacman -S alsa-utils chromium feh i3 i3lock i3status dmenu gsfonts lxterminal p7zip pandoc screen unzip wpa_supplicant xautolock xorg-xdm network-manager-applet cbatticon volumeicon
+
+# fonts
+sudo pacman -S ttf-liberation ttf-freefont ttf-arphic-uming ttf-baekmuk noto-fonts noto-fonts-cjk noto-fonts-emoji
+
 /sbin/reboot
 ```
 

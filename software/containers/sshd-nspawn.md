@@ -25,7 +25,6 @@ AuthorizedKeysFile      .ssh/authorized_keys
 PasswordAuthentication no
 ChallengeResponseAuthentication no
 UsePAM yes
-UsePrivilegeSeparation sandbox          # Default for new installations.
 Subsystem       sftp    /usr/lib/ssh/sftp-server
 Port <number> # will be generated automatically at profile load 
 ```

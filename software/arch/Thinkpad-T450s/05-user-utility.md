@@ -2,7 +2,7 @@
 
 ## Necessary packages
 ```
-sudo pacman -S keepassx2 bash-completion pang arch-install-scripts rfkill cronie rpmextract gconf
+sudo pacman -S keepassx2 bash-completion pang arch-install-scripts rfkill cronie rpmextract gconf vim-supertab
 ```
 
 ## Bash auto-complete

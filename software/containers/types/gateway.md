@@ -1,8 +1,5 @@
-Containers
-==========
-
-## SSH Node
----
+Gateway/SSH Node
+================
 * Requires to be 'booted' for ssh to start/act as a service (systemd-nspawn with '-b')
 * Setup as root, SSH'ing is done as non-root
 * Make sure a 'normal' user is configured (useradd, chown'd $HOME, etc.)

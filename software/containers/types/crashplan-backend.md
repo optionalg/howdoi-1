@@ -1,7 +1,7 @@
 CrashPlan (backend) PRO
 =======================
 
-Before starting make sure to download the latest CrashPlan (PRO) archive
+Before starting make sure to download the latest CrashPlan (PRO) archive, this will be a headless setup
 
 Install the necessary packages
 ```

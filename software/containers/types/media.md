@@ -86,12 +86,6 @@ cd ~
 ln -s ${MNT_STORAGE}/${SYNC_FOLDER} Sync
 ```
 
-If re-using, make sure to clear known hosts, ssh in as well
-```
-rm .ssh/known_hosts
-ssh sync
-```
-
 ## Serving files
 ---
 

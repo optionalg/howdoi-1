@@ -9,7 +9,7 @@ root:[username]@gmail.com:smtp.gmail.com:587
 ```
 root=[username]@gmail.com
 mailhub=smtp.gmail.com:587
-hostname=[username]@gmail.com
+hostname=localhost
 UseSTARTTLS=YES
 AuthUser=[username]@gmail.com
 AuthPass=[password]
@@ -27,3 +27,5 @@ alias user user<username@gmail.com>
 ```
 echo test | mail -v -s "testing ssmtp" <receiving@email.address.com>
 ```
+
+[0] https://wiki.archlinux.org/index.php/SSMTP

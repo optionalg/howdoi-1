@@ -3,7 +3,8 @@ Media management
 * Can begin with a 'started' container (as root)
 * All services/scripts/etc. will run as root
 * Requires additional bind(s) to run
-* Requires an added systemd-nspawn bind AND ssmtp setp per [core](https://github.com/enckse/core-scripts) scripts
+* Requires an added systemd-nspawn bind per [core](https://github.com/enckse/core-scripts) scripts
+* Configure [ssmtp] (https://github.com/enckse/howdoi/blob/master/software/mail/ssmtp.md)
 
 ## Scheduling
 ---

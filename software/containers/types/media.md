@@ -48,11 +48,29 @@ Init already 'downloaded' items and/or cache without creating outputs
 media-schedule --init
 ```
 
+A quick wrapper to report out errors
+```
+vim /opt/wrapper.sh
+---
+#!/bin/bash
+logging=/opt/containers/logs/mail/status.log
+today=$(date +%Y-%m-%d)
+result=$(/usr/local/bin/media-schedule)
+if [ ! -z "$result" ]; then
+    echo "$today -> $result" >> $logging
+fi
+```
+
+An executable
+```
+chmod u+x /opt/wrapper.sh
+```
+
 Setting up crontab to handle media scheduling
 ```
 crontab -e
 ---
-15 * * * * /usr/local/bin/media-schedule
+15 * * * * /opt/wrapper.sh
 ```
 
 Enable cronie

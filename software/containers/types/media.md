@@ -11,7 +11,7 @@ Media management
 
 Add the bind (as indicated above)
 ```
---bind ${MNT_STORAGE}/${ACTIVE}
+--bind ${MNT_STORAGE}/${ACTIVE} --bind ${RSS_FILES}
 ```
 
 Install the necessary packages

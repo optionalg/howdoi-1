@@ -4,7 +4,6 @@ Media management
 * All services/scripts/etc. will run as root
 * Requires additional bind(s) to run
 * Requires an added systemd-nspawn bind per [core](https://github.com/enckse/core-scripts) scripts
-* Configure [ssmtp] (https://github.com/enckse/howdoi/blob/master/software/mail/ssmtp.md)
 
 ## Scheduling
 ---
@@ -16,13 +15,7 @@ Add the bind (as indicated above)
 
 Install the necessary packages
 ```
-pacman -S ssmtp git python3 python-pip wget cron rsync nginx
-```
-
-Configure ssmtp as indicated above
-```
-vim /etc/ssmtp/revaliases
-vim /etc/ssmtp/ssmtp.conf
+pacman -S git python3 python-pip wget cron rsync nginx
 ```
 
 Copy media configurations to container

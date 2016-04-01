@@ -59,7 +59,7 @@ Setting up crontab to handle media scheduling
 ```
 crontab -e
 ---
-30 * * * * /usr/local/bin/media-schedule
+15 * * * * /usr/local/bin/media-schedule
 ```
 
 Enable cronie

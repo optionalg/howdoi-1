@@ -35,7 +35,7 @@ cd ~
 mkdir .ssh
 chmod 700 .ssh
 
-#<copy private to authorized_keys>
+#<copy key(s) to authorized_keys>
 chmod 600 authorized_keys
 
 # leave user context

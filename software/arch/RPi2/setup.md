@@ -120,3 +120,24 @@ cd .ssh
 #<copy key>
 chmod 600 authorized_keys
 ```
+
+## Swap
+```
+fallocate -l 1024M /swapfile
+chmod 600 /swapfile
+mkswap /swapfile
+swapon /swapfile
+echo 'vm.swappiness=1' > /etc/sysctl.d/99-sysctl.conf
+```
+
+```
+vim /etc/fstab
+---
+/swapfile none swap defaults 0 0
+```
+
+## Disable tmpfs
+```
+systemctl stop tmp.mount
+systemctl disable tmp.mount
+```

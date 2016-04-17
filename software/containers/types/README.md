@@ -31,6 +31,4 @@ pacman -Syyu
 
 [CrashPlan (frontend)](https://github.com/enckse/howdoi/blob/master/software/containers/types/crashplan-frontend.md)
 
-[SSH node/gateway](https://github.com/enckse/howdoi/blob/master/software/containers/types/gateway.md)
-
 [Media management](https://github.com/enckse/howdoi/blob/master/software/containers/types/media.md)

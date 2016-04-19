@@ -6,24 +6,4 @@ Google Chrome
 sudo pacman -S rpmextract
 ```
 
-* Extract the download rpm
-```
-rpmextract <chrome>.rpm
-```
-
-* Clean out the old version (if it exists)
-```
-sudo rm -rf /opt/google/chrome/
-```
-
-* Move the necessary bits to the google area
-```
-mv opt/google/chrome/ /opt/google/
-```
-
-* Setup the permissions
-```
-sudo mv usr/bin/google-chrome-stable /usr/bin/google-chrome-stable
-sudo chown root:root /opt/google/chrome/chrome-sandbox
-sudo chmod 4755 /opt/google/chrome/chrome-sandbox
-```
+* check the function "install-chrome" [here](https://raw.githubusercontent.com/enckse/home/master/.bin/helper_cache)

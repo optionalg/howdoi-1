@@ -20,9 +20,9 @@ visudo
 #uncomment %wheel ALL=(ALL) ALL
 ```
 
-## Networking utilities
+## Networking/system utilities
 ```
-pacman -S openssh wget
+pacman -S openssh wget bash-completion arch-install-scripts screen
 ```
 
 # User configuration/bootstrapping
@@ -77,10 +77,42 @@ vim /etc/iptables/iptables.rules
 COMMIT
 ```
 
-# Enabling firewall
+## Enabling firewall
 ```
 systemctl enable iptables
 systemctl start iptables
 reboot
 ```
 
+## Workspace/container setup
+```
+# as root
+mkdir /opt/workspace
+mkdir /opt/workspace/containers
+cd /opt/workspace/containers
+mkdir template
+pacstrap -i -c -d template/ base
+chown enck:enck -R /opt/workspace
+```
+
+## Configure nspawn
+```
+su enck
+cd /opt/workspace
+git clone https://github.com/enckse/nspawn-info
+sudo ln -s /opt/workspace/nspawn-inf/nspawn_autocompletion /usr/share/bash-completion/completions/
+```
+
+## Enable nspawn
+```
+vim /usr/local/bin/nspawn
+---
+export NSPAWN_INFO_SCREEN=1
+export NSPAWN_INFO_CONTAINERS="/opt/workspace/containers"
+/opt/workspace/nspawn-info/nspawn $@
+```
+
+```
+chown enck:enck /usr/local/bin/nspawn
+chmod u+x /usr/local/bin/nspawn
+```

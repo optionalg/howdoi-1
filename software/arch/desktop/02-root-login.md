@@ -19,6 +19,12 @@ usermod -G wheel enck
 visudo
 #uncomment %wheel ALL=(ALL) ALL
 ```
+
+## Networking utilities
+```
+pacman -S openssh wget
+```
+
 # User configuration/bootstrapping
 
 
@@ -29,6 +35,7 @@ cd ~
 rm .bash*
 ```
 
+## Configure git
 ```
 git config --global core.excludesfiles ~/.config/.gitignore
 git config --global push.default simple
@@ -38,3 +45,11 @@ git config --global user.email "<email>"
 git config --global core.autocrlf input
 ```
 
+## Bash profile
+```
+wget https://raw.githubusercontent.com/enckse/home/master/.bash_profile
+wget https://raw.githubusercontent.com/enckse/home/master/.bashrc
+cat .bashrc | head -n 60 > .bashrc.tmp
+mv .bashrc.tmp .bashrc
+wget https://raw.githubusercontent.com/enckse/home/master/.vimrc
+```

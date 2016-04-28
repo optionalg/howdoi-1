@@ -124,6 +124,7 @@ vim /etc/ssh/sshd_config
 ---
 Port <PORT>
 Protocol 2
+# may need to enable, for a moment, to copy keys
 PermitRootLogin no
 PasswordAuthentication no
 ```

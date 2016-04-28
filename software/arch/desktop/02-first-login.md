@@ -116,3 +116,19 @@ export NSPAWN_INFO_CONTAINERS="/opt/workspace/containers"
 chown enck:enck /usr/local/bin/nspawn
 chmod u+x /usr/local/bin/nspawn
 ```
+
+## SSH(d)
+```
+# configure the following
+vim /etc/ssh/sshd_config
+---
+Port <PORT>
+Protocol 2
+PermitRootLogin no
+PasswordAuthentication no
+```
+
+```
+systemctl enable sshd
+systemctl start sshd
+```

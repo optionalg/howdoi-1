@@ -53,3 +53,34 @@ cat .bashrc | head -n 60 > .bashrc.tmp
 mv .bashrc.tmp .bashrc
 wget https://raw.githubusercontent.com/enckse/home/master/.vimrc
 ```
+
+## Cleanup in pacman
+```
+exit # user context
+pacman -Sc
+pacman-key --refresh-keys
+```
+
+## Setup iptables
+```
+# make sure to change <PORT>
+vim /etc/iptables/iptables.rules
+---
+*filter
+:INPUT DROP [11:1508]
+:FORWARD DROP [0:0]
+:OUTPUT ACCEPT [219:35101]
+-A INPUT -i lo -j ACCEPT
+-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+-A INPUT -p tcp -m tcp --dport <PORT> -j ACCEPT
+-A OUTPUT -p tcp -m tcp --sport <PORT> -m state --state RELATED,ESTABLISHED -j ACCEPT
+COMMIT
+```
+
+# Enabling firewall
+```
+systemctl enable iptables
+systemctl start iptables
+reboot
+```
+

@@ -91,10 +91,55 @@ useradd -m -s /bin/bash public
 passwd public
 ```
 
+Define the 'regen' of key
+```
+vim /home/public/regenerate.sh
+---
+SSH_HOME="$HOME/.ssh/"
+PATH_TO="${SSH_HOME}id_rsa"
+OUTPUT_TEXT="/tmp/reg-key"
+
+function print-line()
+{
+    echo "$1" >> $OUTPUT_TEXT
+}
+
+if [ -z "$1" ]; then
+    echo "email address required"
+    exit -1
+fi
+
+echo "when prompted save to $PATH_TO"
+echo "save the password!!!"
+ssh-keygen -t rsa -b 4096 -C "public@localhost"
+mv ${PATH_TO}.pub ${SSH_HOME}authorized_keys
+echo -n "Password: "
+read -s password
+echo
+if [ -z "$password" ]; then
+    echo "password should not be empty..."
+    exit -1
+fi
+TODAY=$(date +%Y-%m-%d)
+print-line "SSH key regenerated ($TODAY)"
+print-line "public@localhost"
+print-line "password: $password"
+mutt -s "SSH public key regen'd ($TODAY)" $1 < $OUTPUT_TEXT -a $PATH_TO
+rm $OUTPUT_TEXT
+```
+
+Setup for the user
+```
+chown public:public /home/public/regenerate.sh
+chmod u+x /home/public/regenerate.sh
+```
+
 Setup the user's ssh profile
 ```
 su public
 cd ~
 mkdir .ssh
 chmod 700 .ssh
+./regenerate.sh <address>
 ```
+

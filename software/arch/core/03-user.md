@@ -83,3 +83,18 @@ Copy or define ssmtp setup and test
 ```
 echo test | mail -v -s "testing" <email>
 ```
+
+## Gateway/rotating user
+Setup the user
+```
+useradd -m -s /bin/bash public
+passwd public
+```
+
+Setup the user's ssh profile
+```
+su public
+cd ~
+mkdir .ssh
+chmod 700 .ssh
+```

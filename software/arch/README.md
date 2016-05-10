@@ -5,6 +5,8 @@ Installing arch on various system and/or with various settings and/or various co
 
 [Clear container caches](https://github.com/enckse/howdoi/blob/master/software/arch/caches.md)
 
+[Downgrade a package](https://github.com/enckse/howdoi/blob/master/software/arch/downgrade.md)
+
 # Installs
 [T450s](https://github.com/enckse/howdoi/blob/master/software/arch/Thinkpad-T450s/README.md)
 

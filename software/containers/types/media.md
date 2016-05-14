@@ -15,7 +15,7 @@ Add the bind (as indicated above)
 
 Install the necessary packages
 ```
-pacman -S git python3 python-pip wget cron rsync 
+pacman -S git python3 python-pip wget cron rsync zip 
 ```
 
 Copy media configurations to container

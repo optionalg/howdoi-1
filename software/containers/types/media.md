@@ -15,7 +15,7 @@ Add the bind (as indicated above)
 
 Install the necessary packages
 ```
-pacman -S git python3 python-pip wget cron rsync nginx
+pacman -S git python3 python-pip wget cron rsync 
 ```
 
 Copy media configurations to container
@@ -147,43 +147,14 @@ ln -s ${MNT_STORAGE}/${SYNC_FOLDER} Sync
 ## Serving files
 ---
 
-Setup the nginx config for browsing, notice the root location
+Create a simple script
 ```
-vim /etc/nginx/nginx.conf
----
-#user html;
-worker_processes  1;
-
-events {
-    worker_connections  1024;
-}
-
-
-http {
-    include       mime.types;
-    default_type  application/octet-stream;
-    sendfile        on;
-    keepalive_timeout  65;
-
-    server {
-        listen       8080;
-	
-        location / {
-	    root ${MNT_STORAGE}/${ACTIVE}/Served;
-            autoindex on;
-            index  index.html index.htm;
-        }
-
-        error_page   500 502 503 504  /50x.html;
-        location = /50x.html {
-            root   /usr/share/nginx/html;
-        }
-    }
-}
+cd /opt/
+echo "python -m http.server 8080" > simple-server.sh
+chmod u+x simple-server.sh
 ```
 
-Enable/start nginx
 ```
-systemctl enable nginx.service
-systemctl start nginx.service
+cd /path/to/files/to/serve
+/opt/simple-server.sh
 ```

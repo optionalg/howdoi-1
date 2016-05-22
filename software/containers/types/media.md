@@ -61,15 +61,48 @@ if [ ! -z "$result" ]; then
 fi
 ```
 
-An executable
+Defining a weather reporting (via email message)
 ```
-chmod u+x /opt/wrapper.sh
+vim /opt/weather.sh
+---
+#!/bin/bash
+DATE=$(date +%Y-%m-%d)
+LOCATED=/opt/containers/logs/mail/feed.weather/
+mkdir -p $LOCATED
+FILENAME="${LOCATED}rss-weather-"$(date +%s)".msg"
+mkdir -p $LOCATED
+TO=$1
+if [ -z $TO ]; then
+    echo "missing to field"
+    exit -1
+fi
+ZIP=$2
+if [ -z $ZIP ]; then
+    echo "missing ZIP code"
+    exit -1
+fi
+
+echo "To: $TO
+Subject: Weather ($DATE)
+MIME-Version: 1.0
+Content-Type: text/html; charset=\"us-ascii\"
+Content-Disposition: inline
+" > $FILENAME
+
+curl -A "none" -s http://wttr.in/$ZIP | grep -v "^<a" >> $FILENAME
 ```
 
-Setting up crontab to handle media scheduling
+And executable bit for both
+```
+chmod u+x /opt/wrapper.sh
+chmod u+x /opt/weather.sh
+```
+
+Setting up crontab to handle scheduling
 ```
 crontab -e
 ---
+15 6 * * * /opt/weather.sh <email> <zip code>
 15 * * * * /opt/wrapper.sh
 ```
 

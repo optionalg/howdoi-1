@@ -67,6 +67,10 @@ vim /opt/weather.sh
 ---
 #!/bin/bash
 DATE=$(date +%Y-%m-%d)
+RAN=/var/tmp/weather-$DATE
+if [ -e $RAN ]; then
+    exit 0
+fi
 LOCATED=/opt/containers/logs/mail/feed.weather/
 mkdir -p $LOCATED
 FILENAME="${LOCATED}rss-weather-"$(date +%s)".msg"
@@ -90,6 +94,7 @@ Content-Disposition: inline
 " > $FILENAME
 
 curl -A "none" -s http://wttr.in/$ZIP | grep -v "^<a" >> $FILENAME
+touch $RAN
 ```
 
 And executable bit for both
@@ -102,7 +107,7 @@ Setting up crontab to handle scheduling
 ```
 crontab -e
 ---
-15 6 * * * /opt/weather.sh <email> <zip code>
+15 5-12 * * * /opt/weather.sh <email> <zip code>
 15 * * * * /opt/wrapper.sh
 ```
 

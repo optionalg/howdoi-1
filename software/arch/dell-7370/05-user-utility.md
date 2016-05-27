@@ -39,6 +39,13 @@ sudo systemctl enable ntpd.service
 sudo systemctl start ntpd.service
 ```
 
+## XDM login
+
+To change the xdm login text
+```
+sudo vim /etc/X11/xdm/Xresources
+```
+
 ## CAC reader
 ```
 sudo pacman -S ccid opensc

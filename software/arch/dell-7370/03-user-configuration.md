@@ -82,6 +82,8 @@ git config --global core.autocrlf input
 ## Make sure networking is set/utils available
 ```
 sudo pacman -Syyu
+sudo pacman -Sc
+sudo pacman-key --refresh-key
 sudo pacman -S networkmanager perl-uri
 sudo systemctl enable NetworkManager.service
 sudo systemctl start NetworkManager.service

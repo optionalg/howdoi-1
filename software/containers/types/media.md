@@ -193,6 +193,54 @@ chmod u+x simple-server.sh
 ```
 
 ```
+systemctl stop nginx
 cd /path/to/files/to/serve
 /opt/simple-server.sh
+systemctl start nginx
+```
+
+## nginx
+
+```
+pacman -S nginx
+```
+
+```
+vim /etc/nginx/nginx.conf
+---
+
+#user html;
+worker_processes  1;
+
+events {
+    worker_connections  1024;
+}
+
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+    sendfile        on;
+    keepalive_timeout  65;
+
+    server {
+        listen       8080;
+
+        location / {
+        root /mnt/Storage/Active/Temp/podcasts;
+            autoindex on;
+            index  index.html index.htm;
+        }
+
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   /usr/share/nginx/html;
+        }
+    }
+}
+```
+
+```
+systemctl enable nginx
+systemctl start nginx
 ```

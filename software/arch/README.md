@@ -7,6 +7,8 @@ Installing arch on various system and/or with various settings and/or various co
 
 [Downgrade a package](https://github.com/enckse/howdoi/blob/master/software/arch/downgrade.md)
 
+[Mainline kernel](https://github.com/enckse/howdoi/blob/master/software/arch/mainline.md)
+
 # Installs
 [T450s](https://github.com/enckse/howdoi/blob/master/software/arch/Thinkpad-T450s/README.md)
 

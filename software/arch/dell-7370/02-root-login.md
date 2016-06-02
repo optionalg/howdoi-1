@@ -19,3 +19,10 @@ visudo
 #uncomment %wheel ALL=(ALL) ALL
 usermod -G wheel enck
 ```
+
+## Blacklist
+
+Blacklist the pc-speaker...
+```
+echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
+```

@@ -9,3 +9,11 @@ sudo vim /etc/systemd/login.conf
 HandleLidSwitchDocked=ignore
 LidSwitchIgnoreInhibited=yes
 ```
+
+Cache setup
+```
+cd .cache
+ln -s /mnt/Synced/cache/misc/* .
+ln -s /mnt/Synced/cache/nspawn .
+ln -s /mnt/Synced/cache/urls/* dmenu_urls/
+```

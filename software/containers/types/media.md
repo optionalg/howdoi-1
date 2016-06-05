@@ -227,7 +227,7 @@ http {
         listen       8080;
 
         location / {
-        root /mnt/Storage/Active/Temp/podcasts;
+        root /mnt/Storage/Active/Temp;
             autoindex on;
             index  index.html index.htm;
         }

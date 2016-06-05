@@ -2,7 +2,7 @@
 
 ## Necessary packages
 ```
-sudo pacman -S keepassx2 bash-completion rpmextract gconf arch-install-scripts wget ntp tree hexchat sqlitebrowser
+sudo pacman -S keepassx2 bash-completion rpmextract gconf arch-install-scripts wget ntp tree hexchat sqlitebrowser vlc
 ```
 
 ## Bash auto-complete

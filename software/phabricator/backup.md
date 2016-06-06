@@ -43,4 +43,5 @@ find $BACKUP/* -mtime +30 -type f -exec rm {} \;
 find $BACKUP -empty -type d -delete
 ```
 
-[[0]](https://secure.phabricator.com/book/phabricator/article/configuring_backups/)
+#### References
+[backing up](https://secure.phabricator.com/book/phabricator/article/configuring_backups/)

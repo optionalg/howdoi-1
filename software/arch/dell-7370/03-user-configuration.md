@@ -97,7 +97,6 @@ cd ~/.bin
 # again, ssh agent not configured
 
 # Init local scripts
-./nspawn --install
 ./csv-processing --install
 ./syncing --install
 systemctl start syncing@enck.service

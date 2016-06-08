@@ -115,9 +115,10 @@ Packages
 pacman -S screen arch-install-scripts
 ```
 
-Either copy archived containers or recreate, make sure they boot
+Follow [this](https://github.com/enckse/howdoi/blob/master/software/containers/init-nspawn.md) and either copy archived containers or recreate, make sure they boot
+
 ```
-nspawn start <container(s)>
+machinectl enable <container>
 ```
 
 Reboot

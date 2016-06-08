@@ -96,20 +96,12 @@ chown enck:enck -R /opt/workspace
 ```
 
 ## Configure nspawn
-```
-su enck
-cd /opt/workspace
-git clone https://github.com/enckse/nspawn-info
-sudo ln -s /opt/workspace/nspawn-inf/nspawn_autocompletion /usr/share/bash-completion/completions/
-```
 
-## Enable nspawn
+Follow [this](https://github.com/enckse/howdoi/blob/master/software/containers/init-nspawn.md)
 ```
-vim /usr/local/bin/nspawn
----
-export NSPAWN_INFO_SCREEN=1
-export NSPAWN_INFO_CONTAINERS="/opt/workspace/containers"
-/opt/workspace/nspawn-info/nspawn $@
+curl https://raw.githubusercontent.com/enckse/home/master/.bin/spawn-container > /usr/local/bin/spawn-container
+chown enck:enck /usr/local/bin/spawn-container
+chmod u+x /usr/local/bin/spawn-container
 ```
 
 ```

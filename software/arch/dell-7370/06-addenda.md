@@ -23,14 +23,4 @@ ln -s /mnt/Synced/cache/urls/* dmenu_urls/
 
 ## machinectl
 
-```
-systemctl enable machines.target
-```
-
-```
-sudo systemctl edit systemd-nspawn@.service
----
-[Service]
-ExecStart=
-ExecStart=/usr/bin/systemd-nspawn --quiet --keep-unit --boot --link-journal=try-guest --machine=%I
-```
+Follow [this](https://github.com/enckse/howdoi/blob/master/software/containers/init-nspawn.md)

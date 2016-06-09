@@ -97,7 +97,43 @@ rsync -vrziut /tmp/store .
 cd /opt/
 git clone /mnt/Storage/Git/core.git --recursive
 cd core
-./manage.sh --install
+```
+
+setup areas
+```
+mkdir -p /opt/core/tmp
+mkdir -p /opt/core/tmp/repositories
+mkdir -p /opt/containers
+mkdir -p /opt/containers/shared
+mkdir -p /opt/containers/logs
+for d in $(echo "cp mail"); do mkdir -p /opt/containers/logs/$d; done
+```
+
+iptables
+```
+ln -s /opt/core/iptables.rules /etc/iptables/iptables.rules
+systemctl enable iptables.service
+```
+
+containers
+```
+pacman -S screen arch-install-scripts
+mkdir -p /etc/systemd/nspawn
+```
+
+Follow [this](https://github.com/enckse/howdoi/blob/master/software/containers/init-nspawn.md) and either copy archived containers or recreate, make sure they boot
+
+link nspawn files
+```
+# for each file in /opt/core/systemd-nspawn
+ln -s /opt/core/systemd_nspawn/<file> /etc/systemd/nspawn/<name>.nspawn
+```
+
+helpers
+```
+cat /opt/core/systemd_nspawn/new.template > /var/lib/machines/new.template
+curl "https://raw.githubusercontent.com/enckse/home/master/.bin/spawn-container" > /usr/local/bin/spawn-container
+chmod u+x /usr/local/bin/spawn-container
 ```
 
 ## Stage data
@@ -107,18 +143,6 @@ mkdir -p /mnt/Staging/Common
 ./sync-backer.sh staging
 ./sync-backer.sh archive 
 rsync -vrziutc /tmp/store .
-```
-
-## Create containers
-Packages
-```
-pacman -S screen arch-install-scripts
-```
-
-Follow [this](https://github.com/enckse/howdoi/blob/master/software/containers/init-nspawn.md) and either copy archived containers or recreate, make sure they boot
-
-```
-machinectl enable <container>
 ```
 
 Reboot

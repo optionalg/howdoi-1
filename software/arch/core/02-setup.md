@@ -132,8 +132,8 @@ ln -s /opt/core/systemd_nspawn/<file> /etc/systemd/nspawn/<name>.nspawn
 helpers
 ```
 cat /opt/core/systemd_nspawn/new.template > /var/lib/machines/new.template
-curl "https://raw.githubusercontent.com/enckse/home/master/.bin/spawn-container" > /usr/local/bin/spawn-container
-chmod u+x /usr/local/bin/spawn-container
+curl "https://raw.githubusercontent.com/enckse/home/master/.bin/machinectl-helper" > /usr/local/bin/machinectl-helper
+chmod u+x /usr/local/bin/machinectl-helper
 ```
 
 ## Stage data

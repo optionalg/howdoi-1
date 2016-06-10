@@ -99,8 +99,8 @@ chown enck:enck -R /opt/workspace
 
 Follow [this](https://github.com/enckse/howdoi/blob/master/software/containers/init-nspawn.md)
 ```
-curl https://raw.githubusercontent.com/enckse/home/master/.bin/spawn-container > /usr/local/bin/spawn-container
-chmod u+x /usr/local/bin/spawn-container
+curl https://raw.githubusercontent.com/enckse/home/master/.bin/machinectl-helper > /usr/local/bin/machinectl-helper
+chmod u+x /usr/local/bin/machinectl-helper
 ```
 
 ## SSH(d)

@@ -6,3 +6,5 @@ files
 [Encrypt/decrypt a file via gpg?](https://github.com/enckse/howdoi/blob/master/software/files/encrypt-decrypt-file.md)
 
 [Archiving/indexing image files?](https://github.com/enckse/howdoi/blob/master/software/files/index-file-info.md)
+
+[Convert cbr/cbz?](https://github.com/enckse/howdoi/blob/master/software/files/convert-cbz-cbr.md)

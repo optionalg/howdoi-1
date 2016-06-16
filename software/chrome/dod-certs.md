@@ -1,17 +1,14 @@
 #### Install the necessary root DoD certs
 
-Navigate to: http://dodpki.c3pki.chamb.disa.mil/rootca.html, if you view source you'll see links to .p7b files - which is what we need to import
+Navigate to http://iase.disa.mil/pki-pke/Pages/tools.aspx
 
-In a 'temp' location 
-```
-wget http://dodpki.c3pki.chamb.disa.mil/dodeca.p7b
-wget http://dodpki.c3pki.chamb.disa.mil/dodeca2.p7b
-wget http://dodpki.c3pki.chamb.disa.mil/rel3_dodroot_2048.p7b
-```
+Go to "Trust Store" and down to the "PKI CA Certificate Bundles: PKCS#7" section, download the "For DoD PKI Only - Version 5.0" zip
 
-* Now get them into the actual store (requires libnss3-tools in Debian)
+In a temp location
 ```
-for n in *.p7b; do certutil -d sql:$HOME/.pki/nssdb -A -t TC -n $n -i $n; done
+unzip Certificates_PKCS7_v5.0u1_DoD.zip
+cd Certificates_PKCS7_v5.0u1_DoD
+for n in (ls * | grep Chrome); do certutil -d sql:$HOME/.pki/nssdb -A -t TC -n $n -i $n; done
 ```
 
 * The p7b files can be removed now from the 'temp' location

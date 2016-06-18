@@ -227,9 +227,17 @@ http {
         listen       8080;
 
         location / {
-        root /mnt/Storage/Active/Temp;
+            auth_basic "closed site";
+            auth_basic_user_file htpasswd;
+            root /mnt/Storage/Active/Temp;
             autoindex on;
             index  index.html index.htm;
+        }
+
+        location /shared {
+            root /mnt/Storage/Active/Temp;
+            autoindex on;
+            index  index.html index.html;
         }
 
         error_page   500 502 503 504  /50x.html;
@@ -238,6 +246,17 @@ http {
         }
     }
 }
+```
+
+Copy the resulting password from
+```
+openssl passwd
+```
+
+```
+vim /etc/nginx/htpasswd
+---
+<user>:<pass>
 ```
 
 ```

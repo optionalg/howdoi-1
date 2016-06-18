@@ -116,7 +116,7 @@ vim /boot/loader/entries/arch-encrypted.conf
 title Arch Linux
 linux /vmlinuz-linux
 initrd /initramfs-linux.img
-options cyrptdevice=UUID=</dev/nvm0n1pX UUID>:vg0 root=/dev/mapper/vg0-root quiet rw
+options cyrptdevice=UUID=</dev/nvm0n1pX UUID>:vg0 root=/dev/mapper/vg0-root quiet rw ipv6.disable_ipv6=1
 ```
 
 

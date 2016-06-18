@@ -86,6 +86,13 @@ grub-install --target=i386-pc /dev/sdX
 grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
+```
+vim /etc/default/grub
+---
+# append to GRUB_CMDLINE_LINUX_DEFAULT
+ipv6.disable_ipv6=1
+```
+
 ## Close up shop and do reboot into installed system
 ```
 exit

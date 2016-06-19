@@ -179,7 +179,7 @@ ssh-keygen -t rsa -b 4096 -C "<email>"
 Create a link (as user)
 ```
 cd ~
-ln -s ${MNT_STORAGE}/${SYNC_FOLDER} Sync
+ln -s ${MNT_STORAGE}/Home/Synced Sync
 ```
 
 ## Serving files

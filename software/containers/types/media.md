@@ -1,17 +1,9 @@
 Media management
 ================
-* Can begin with a 'started' container (as root)
-* All services/scripts/etc. will run as root
-* Requires additional bind(s) to run
-* Requires an added systemd-nspawn bind per [core](https://github.com/enckse/core-scripts) scripts
+* Requires additional bind(s) to run (for syncing/hosting/storage)
 
 ## Scheduling
 ---
-
-Add the bind (as indicated above)
-```
---bind ${MNT_STORAGE}/${ACTIVE} --bind ${RSS_FILES}
-```
 
 Install the necessary packages
 ```
@@ -120,7 +112,6 @@ systemctl start cronie.service
 ## Sync
 ---
 * Will be using rsync to do actual sync as shown [here](https://github.com/enckse/home/blob/master/.bin/syncing)
-* Requires to be 'booted' for ssh to start/act as a service (systemd-nspawn with '-b')
 * Setup as root, SSH'ing is done as non-root
 * Make sure a 'normal' user is configured (useradd, chown'd $HOME, etc.)
 
@@ -180,23 +171,6 @@ Create a link (as user)
 ```
 cd ~
 ln -s ${MNT_STORAGE}/Home/Synced Sync
-```
-
-## Serving files
----
-
-Create a simple script
-```
-cd /opt/
-echo "python -m http.server 8080" > simple-server.sh
-chmod u+x simple-server.sh
-```
-
-```
-systemctl stop nginx
-cd /path/to/files/to/serve
-/opt/simple-server.sh
-systemctl start nginx
 ```
 
 ## nginx

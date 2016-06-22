@@ -3,5 +3,4 @@ Phabricator
 
 Interacting with phabricator
 
-[Backup](https://github.com/enckse/howdoi/blob/master/software/phabricator/backup.md)
-
+[Backup](https://github.com/epiphyte/phabricator-tools/tree/master/utilities/phriction2pdf)

@@ -72,6 +72,9 @@ case $1 in
         res=$(upodder --podcastdir $store)
         report "$res"
         ;;
+    "weather")
+        /opt/weather.sh $WEATHER $ZIP
+        ;;
     "rss")
         daily="-v"
         bi="-v"
@@ -137,7 +140,7 @@ Setting up crontab to handle scheduling
 ```
 crontab -e
 ---
-15 5-12 * * * /opt/weather.sh <email> <zip> 
+15 5-12 * * * /opt/wrapper.sh weather
 15 8,11,14,17,20 * * * /opt/wrapper.sh rss
 15 12,18 * * * /opt/wrapper.sh rss bi-daily
 15 19 * * * /opt/wrapper.sh rss daily

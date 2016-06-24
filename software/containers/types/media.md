@@ -50,14 +50,81 @@ A quick wrapper to report out errors
 ```
 vim /opt/wrapper.sh
 ---
-[INSERT SCRIPT]
+#!/bin/bash
+source $HOME/.config/media
+status_file=/opt/containers/logs/mail/status.log
+podcast_dir=/mnt/Storage/Active/Temp/podcasts/
+today=$(date +%Y-%m-%d)
+function report()
+{
+    if [ ! -z "$1" ]; then
+        echo "$today -> $1" >> $status_file
+    fi
+}
+
+mkdir -p $podcast_dir
+find $podcast_dir* -mtime +30 -type f -exec rm {} \;
+find $podcast_dir -empty -type d -delete
+case $1 in
+    "podcasts")
+        store=$podcast_dir$today
+        mkdir -p $store
+        res=$(upodder --podcastdir $store)
+        report "$res"
+        ;;
+    "rss")
+        daily="-v"
+        bi="-v"
+        case $2 in
+            "daily")
+                daily=""
+                ;;
+            "bi-daily")
+                bi=""
+                ;; 
+     	esac
+        for r in $(r2e list | grep $daily -E "$DAILY_FEEDS" | grep $bi -E "$BI_DAILY_FEEDS" | cut -d ":" -f 1); do
+            res=$(r2e run --no-send $r)
+            report $res
+        done
+        ;;
+esac
 ```
 
 Defining a weather reporting (via email message)
 ```
 vim /opt/weather.sh
 ---
-[INSERT SCRIPT]
+#!/bin/bash
+DATE=$(date +%Y-%m-%d)
+RAN=/var/tmp/weather-$DATE
+if [ -e $RAN ]; then
+    exit 0
+fi
+LOCATED=/opt/containers/logs/mail/feed.weather/
+mkdir -p $LOCATED
+FILENAME="${LOCATED}rss-weather-"$(date +%s)".msg"
+mkdir -p $LOCATED
+TO=$1
+if [ -z $TO ]; then
+    echo "missing to field"
+    exit -1
+fi
+ZIP=$2
+if [ -z $ZIP ]; then
+    echo "missing ZIP code"
+    exit -1
+fi
+
+echo "To: $TO
+Subject: Weather ($DATE)
+MIME-Version: 1.0
+Content-Type: text/html; charset=\"us-ascii\"
+Content-Disposition: inline
+" > $FILENAME
+
+curl -A "none" -s http://wttr.in/$ZIP | grep -v "^<a" >> $FILENAME
+touch $RAN
 ```
 
 And executable bit for both
@@ -70,7 +137,11 @@ Setting up crontab to handle scheduling
 ```
 crontab -e
 ---
-[CRONTAB]
+15 5-12 * * * /opt/weather.sh enckse+weather@gmail.com 48073
+15 8,11,14,17,20 * * * /opt/wrapper.sh rss
+15 12,18 * * * /opt/wrapper.sh rss bi-daily
+15 19 * * * /opt/wrapper.sh rss daily
+15 23 * * * /opt/wrapper.sh podcasts
 ```
 
 Enable cronie
@@ -143,7 +214,43 @@ ln -s ${MNT_STORAGE}/Home/Synced Sync
 ```
 vim /etc/nginx/nginx.conf
 ---
-[INSERT CONF]
+#user html;
+worker_processes  1;
+
+events {
+    worker_connections  1024;
+}
+
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+    sendfile        on;
+    keepalive_timeout  65;
+
+    server {
+        listen       8080;
+
+        location / {
+            auth_basic "closed site";
+            auth_basic_user_file htpasswd;
+            root /mnt/Storage/Active/Temp;
+            autoindex on;
+            index  index.html index.htm;
+        }
+
+	location /shared {
+	    root /mnt/Storage/Active/Temp;
+            autoindex on;
+            index  index.html index.htm;
+	}
+
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   /usr/share/nginx/html;
+        }
+    }
+}
 ```
 
 ```

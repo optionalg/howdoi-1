@@ -84,7 +84,7 @@ case $1 in
                 ;; 
      	esac
         for r in $(r2e list | grep $daily -E "$DAILY_FEEDS" | grep $bi -E "$BI_DAILY_FEEDS" | cut -d ":" -f 1); do
-            res=$(r2e run --no-send $r)
+            res=$(r2e run $r)
             report $res
         done
         ;;

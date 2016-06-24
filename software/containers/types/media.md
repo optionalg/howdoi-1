@@ -55,11 +55,33 @@ source $HOME/.config/media
 status_file=/opt/containers/logs/mail/status.log
 podcast_dir=/mnt/Storage/Active/Temp/podcasts/
 today=$(date +%Y-%m-%d)
+located=/opt/containers/logs/mail/feed.weather/
+weather_ran=/var/tmp/weather-$today
 function report()
 {
     if [ ! -z "$1" ]; then
         echo "$today -> $1" >> $status_file
     fi
+}
+
+function get-weather()
+{
+     if [ -e $weather_ran ]; then
+        exit 0
+     fi
+     mkdir -p $located
+     FILENAME="${located}rss-weather-"$(date +%s)".msg"
+     mkdir -p $located
+
+    echo "To: $WEATHER
+Subject: Weather ($today)
+MIME-Version: 1.0
+Content-Type: text/html; charset=\"us-ascii\"
+Content-Disposition: inline
+" > $FILENAME
+
+    curl -A "none" -s http://wttr.in/$ZIP | grep -v "^<a" >> $FILENAME
+    touch $weather_ran
 }
 
 mkdir -p $podcast_dir
@@ -73,7 +95,8 @@ case $1 in
         report "$res"
         ;;
     "weather")
-        /opt/weather.sh $WEATHER $ZIP
+        res=$(get-weather)
+        report "$res"
         ;;
     "rss")
         daily="-v"
@@ -94,46 +117,9 @@ case $1 in
 esac
 ```
 
-Defining a weather reporting (via email message)
-```
-vim /opt/weather.sh
----
-#!/bin/bash
-DATE=$(date +%Y-%m-%d)
-RAN=/var/tmp/weather-$DATE
-if [ -e $RAN ]; then
-    exit 0
-fi
-LOCATED=/opt/containers/logs/mail/feed.weather/
-mkdir -p $LOCATED
-FILENAME="${LOCATED}rss-weather-"$(date +%s)".msg"
-mkdir -p $LOCATED
-TO=$1
-if [ -z $TO ]; then
-    echo "missing to field"
-    exit -1
-fi
-ZIP=$2
-if [ -z $ZIP ]; then
-    echo "missing ZIP code"
-    exit -1
-fi
-
-echo "To: $TO
-Subject: Weather ($DATE)
-MIME-Version: 1.0
-Content-Type: text/html; charset=\"us-ascii\"
-Content-Disposition: inline
-" > $FILENAME
-
-curl -A "none" -s http://wttr.in/$ZIP | grep -v "^<a" >> $FILENAME
-touch $RAN
-```
-
-And executable bit for both
+executable bit
 ```
 chmod u+x /opt/wrapper.sh
-chmod u+x /opt/weather.sh
 ```
 
 Setting up crontab to handle scheduling

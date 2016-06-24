@@ -32,7 +32,7 @@ python setup.py install
 ln -s /opt/r2e/r2e /usr/local/bin/
 ```
 
-Workaround [this](https://github.com/m3nu/upodder/issues/16)
+Workaround [this] open issue (https://github.com/m3nu/upodder/issues/16)
 ```
 vim /usr/lib/python3.5/site-packages/upodder/upodder.py
 ---
@@ -137,7 +137,7 @@ Setting up crontab to handle scheduling
 ```
 crontab -e
 ---
-15 5-12 * * * /opt/weather.sh enckse+weather@gmail.com 48073
+15 5-12 * * * /opt/weather.sh <email> <zip> 
 15 8,11,14,17,20 * * * /opt/wrapper.sh rss
 15 12,18 * * * /opt/wrapper.sh rss bi-daily
 15 19 * * * /opt/wrapper.sh rss daily

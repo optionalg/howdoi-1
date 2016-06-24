@@ -7,86 +7,57 @@ Media management
 
 Install the necessary packages
 ```
-pacman -S git python3 python-pip wget cron rsync zip 
+pacman -S git python3 python-pip cron rsync nginx openssh
 ```
 
-Copy media configurations to container
+Make necessary dirs/files
 ```
 cd $HOME
 mkdir -p .config
+mkdir -p .upodder
+mkdir -p .local/share
+mkdir -p .cache/
 cp <media/file/path>/media .config/
-cp <media/file/path>/media-retention .config/
+cp <media/file/path>/rss2email.cfg .config/
+cp <media/file/path>/subscriptions .upodder/
 ```
 
-Setup 'media-scheduler'
+Setup utililities
 ```
 cd /opt
-git clone https://github.com/enckse/media-scheduler
-ln -s /opt/media-scheduler/media-schedule /usr/local/bin/
-media-schedule --install
+git clone https://github.com/enckse/rss2email.git r2e
+cd r2e
+pip3 install feedparser html2text upodder
+python setup.py install
+ln -s /opt/r2e/r2e /usr/local/bin/
 ```
 
-Apply additional config files
+Workaround [this](https://github.com/m3nu/upodder/issues/16)
 ```
-cd $HOME
-cp <media/file/path>/rss2email.cfg .config/
-mkdir -p .podget
-cp <media/file/path>/podgetrc .podget/
-cp <media/file/path>/serverlist .podget/
+vim /usr/lib/python3.5/site-packages/upodder/upodder.py
+---
+# change .DEBUG -> .ERROR
 ```
 
 Init already 'downloaded' items and/or cache without creating outputs
 ```
-media-schedule --init
+r2e run --no-send
+upodder --no-download
+upodder --mark-seen
 ```
 
 A quick wrapper to report out errors
 ```
 vim /opt/wrapper.sh
 ---
-#!/bin/bash
-logging=/opt/containers/logs/mail/status.log
-today=$(date +%Y-%m-%d)
-result=$(/usr/local/bin/media-schedule)
-if [ ! -z "$result" ]; then
-    echo "$today -> $result" >> $logging
-fi
+[INSERT SCRIPT]
 ```
 
 Defining a weather reporting (via email message)
 ```
 vim /opt/weather.sh
 ---
-#!/bin/bash
-DATE=$(date +%Y-%m-%d)
-RAN=/var/tmp/weather-$DATE
-if [ -e $RAN ]; then
-    exit 0
-fi
-LOCATED=/opt/containers/logs/mail/feed.weather/
-mkdir -p $LOCATED
-FILENAME="${LOCATED}rss-weather-"$(date +%s)".msg"
-mkdir -p $LOCATED
-TO=$1
-if [ -z $TO ]; then
-    echo "missing to field"
-    exit -1
-fi
-ZIP=$2
-if [ -z $ZIP ]; then
-    echo "missing ZIP code"
-    exit -1
-fi
-
-echo "To: $TO
-Subject: Weather ($DATE)
-MIME-Version: 1.0
-Content-Type: text/html; charset=\"us-ascii\"
-Content-Disposition: inline
-" > $FILENAME
-
-curl -A "none" -s http://wttr.in/$ZIP | grep -v "^<a" >> $FILENAME
-touch $RAN
+[INSERT SCRIPT]
 ```
 
 And executable bit for both
@@ -99,8 +70,7 @@ Setting up crontab to handle scheduling
 ```
 crontab -e
 ---
-15 5-12 * * * /opt/weather.sh <email> <zip code>
-15 * * * * /opt/wrapper.sh
+[CRONTAB]
 ```
 
 Enable cronie
@@ -114,11 +84,6 @@ systemctl start cronie.service
 * Will be using rsync to do actual sync as shown [here](https://github.com/enckse/home/blob/master/.bin/syncing)
 * Setup as root, SSH'ing is done as non-root
 * Make sure a 'normal' user is configured (useradd, chown'd $HOME, etc.)
-
-Make sure sshd is installed
-```
-pacman -S openssh
-```
 
 Edit/modify these settings to validate/verify proper config
 
@@ -176,53 +141,11 @@ ln -s ${MNT_STORAGE}/Home/Synced Sync
 ## nginx
 
 ```
-pacman -S nginx
-```
-
-```
 vim /etc/nginx/nginx.conf
 ---
-
-#user html;
-worker_processes  1;
-
-events {
-    worker_connections  1024;
-}
-
-
-http {
-    include       mime.types;
-    default_type  application/octet-stream;
-    sendfile        on;
-    keepalive_timeout  65;
-
-    server {
-        listen       8080;
-
-        location / {
-            auth_basic "closed site";
-            auth_basic_user_file htpasswd;
-            root /mnt/Storage/Active/Temp;
-            autoindex on;
-            index  index.html index.htm;
-        }
-
-        location /shared {
-            root /mnt/Storage/Active/Temp;
-            autoindex on;
-            index  index.html index.html;
-        }
-
-        error_page   500 502 503 504  /50x.html;
-        location = /50x.html {
-            root   /usr/share/nginx/html;
-        }
-    }
-}
+[INSERT CONF]
 ```
 
-Copy the resulting password from
 ```
 openssl passwd
 ```

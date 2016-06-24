@@ -52,10 +52,11 @@ vim /opt/wrapper.sh
 ---
 #!/bin/bash
 source $HOME/.config/media
-status_file=/opt/containers/logs/mail/status.log
+mail_out=/opt/containers/logs/mail/
+status_file=${mail_out}status.log
 podcast_dir=/mnt/Storage/Active/Temp/podcasts/
 today=$(date +%Y-%m-%d)
-located=/opt/containers/logs/mail/feed.weather/
+located=${mail_out}feed.weather/
 weather_ran=/var/tmp/weather-$today
 function report()
 {
@@ -71,7 +72,6 @@ function get-weather()
      fi
      mkdir -p $located
      FILENAME="${located}rss-weather-"$(date +%s)".msg"
-     mkdir -p $located
 
     echo "To: $WEATHER
 Subject: Weather ($today)

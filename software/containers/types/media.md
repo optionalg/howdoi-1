@@ -27,16 +27,13 @@ Setup utililities
 cd /opt
 git clone https://github.com/enckse/rss2email.git r2e
 cd r2e
-pip3 install feedparser html2text upodder
+pip3 install feedparser html2text
 python setup.py install
 ln -s /opt/r2e/r2e /usr/local/bin/
-```
-
-Workaround [this] open issue (https://github.com/m3nu/upodder/issues/16)
-```
-vim /usr/lib/python3.5/site-packages/upodder/upodder.py
----
-# change .DEBUG -> .ERROR
+cd /opt
+git clone https://github.com/enckse/upodder.git upodder
+cd upodder
+python setup.py install
 ```
 
 Init already 'downloaded' items and/or cache without creating outputs
@@ -91,7 +88,7 @@ case $1 in
     "podcasts")
         store=$podcast_dir$today
         mkdir -p $store
-        res=$(upodder --podcastdir $store)
+        res=$(upodder --quiet --podcastdir $store)
         report "$res"
         ;;
     "weather")

@@ -14,7 +14,7 @@ ERROR_BOUND=5400
 touch $WATCHDOG_LOG
 function report-entry()
 {
-	echo "$TODAY - $1" >> $WATCHDOG_LOG
+	echo "$TODAY ($NOW) - $1" >> $WATCHDOG_LOG
 }
 
 function crashplan-running()

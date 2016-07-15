@@ -71,9 +71,3 @@ systemctl start crashplan.service
 ```
 
 Install [watchdog](https://github.com/enckse/howdoi/blob/master/software/crashplan/crashplan-watchdog.md) to '/opt/crashplan-watcher' and enable in crontab
-
-Enable watchdog
-```
-systemctl enable crashplan-watchdog.timer
-systemctl start crashplan-watchdog.service
-```

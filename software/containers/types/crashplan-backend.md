@@ -5,7 +5,7 @@ Before starting make sure to download the latest CrashPlan (PRO) archive, this w
 
 Install the necessary packages
 ```
-pacman -S cpio cronie
+pacman -S cpio 
 ```
 
 Move into the working area and unpack the CrashPlan archive
@@ -71,14 +71,9 @@ systemctl start crashplan.service
 ```
 
 Install [watchdog](https://github.com/enckse/howdoi/blob/master/software/crashplan/crashplan-watchdog.md) to '/opt/crashplan-watcher' and enable in crontab
-```
-crontab -e
----
-0,15,30,45 * * * * /opt/crashplan-watcher
-```
 
-Enable cronie
+Enable watchdog
 ```
-systemctl enable cronie.service
-systemctl start cronie.service
+systemctl enable crashplan-watchdog.timer
+systemctl start crashplan-watchdog.service
 ```

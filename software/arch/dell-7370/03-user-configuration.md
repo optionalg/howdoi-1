@@ -29,6 +29,7 @@ sudo pacman -S openssh rsync exfat-utils
 ```
 mount /dev/<usb> /mnt/usb
 mv /mnt/usb/.synced ~
+chown -R 755 ~/.synced
 cp ~/.synced/crypt.img /tmp/crypt.img
 sudo cryptsetup luksOpen --readonly /tmp/crypt.img crypt-tmp
 sudo mount /dev/mapper/crypt-tmp /mnt/crypt

@@ -65,7 +65,7 @@ sudo systemctl enable pcscd.service
 sudo systemctl start pcscd.service
 ```
 
-Follow instructions from [here](https://github.com/enckse/howdoi/blob/master/software/chrome/dod-certs.md)
+Follow instructions from [here](https://wiki.archlinux.org/index.php/Dell_Latitude_7370)
 
 ## Icons
 

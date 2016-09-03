@@ -101,3 +101,5 @@ Make a link
 ```
 sudo ln -s /home/enck/.bin/locking /usr/local/bin/
 ```
+
+Things may not still be working but we're close (don't debug anything _just_ yet)

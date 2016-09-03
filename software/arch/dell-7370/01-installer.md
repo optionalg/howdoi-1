@@ -49,7 +49,7 @@ mount /dev/nvme0n1p1 /mnt/boot
 
 ## Package installation (for install)
 ```
-pacstrap /mnt base vim git
+pacstrap /mnt base vim git btrfs-progs
 ```
 
 ## Setup fstab

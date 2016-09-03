@@ -11,51 +11,47 @@ rm .bash*
 ## Setup shares for later
 ```
 sudo mkdir /mnt/Storage
-sudo mkdir /mnt/Synced
 sudo mkdir /mnt/usb
 sudo mkdir /mnt/crypt
-sudo chown enck:enck /mnt/S*
+sudo chown enck:enck /mnt/Storage
 sudo chown enck:enck /mnt/crypt
 ```
 
 ## Get initial bootstrapping data
 ```
 # Need scp/ssh and rsync for sync'ing
-sudo pacman -S openssh rsync
-
-# A place to scp/copy from
-sudo vim /etc/hosts
+sudo pacman -S openssh rsync exfat-utils
 ```
 
 * Need to get the copied data locally (via usb from another machine)
 
-## Bootstrap in /tmp
+## Bootstrapping crypt
 ```
-cd /tmp
-cp /mnt/Synced/crypt.img .
-sudo cryptsetup luksOpen--readonly /tmp/crypt.img crypt-tmp
+mount /dev/<usb> /mnt/usb
+mv /mnt/usb/.synced ~
+cp ~/.synced/crypt.img /tmp/crypt.img
+sudo cryptsetup luksOpen --readonly /tmp/crypt.img crypt-tmp
 sudo mount /dev/mapper/crypt-tmp /mnt/crypt
+umount /mnt/usb
 ```
 
 ## Setting up $HOME
 ```
 cd ~
-mkdir -p .ssh
-cd .ssh/
-ln -s /mnt/crypt/ssh/ssh.config config
-cd ~
-```
-
-## Git setup
-```
+chown enck:enck -R ~/.synced
 git init
-git remote add origin git@github.com:enckse/home.git
+git remote add origin https://github.com/enckse/home.git
 git fetch
-git checkout -t origin/master
+git pull origin master
+ln -s ~/.synced/ssh/config ~/.ssh/config
+chmod 600 .ssh/config
+git remote remove origin
+git remote add origin git@github.com:enckse/home.git
 ```
 
 ## Reboot
 ```
+exit
 sudo /sbin/reboot
 ```
 
@@ -63,7 +59,6 @@ sudo /sbin/reboot
 ```
 cd ~
 mkdir Downloads
-mkdir .tmp
 .bin/mounting crypt
 # there may be warnings about ssh-agent (not configured yet!)
 
@@ -86,8 +81,7 @@ sudo pacman -Sc
 sudo pacman-key --refresh-key
 sudo pacman -S networkmanager perl-uri
 sudo systemctl enable NetworkManager.service
-sudo systemctl start NetworkManager.service
-/sbin/reboot
+sudo /sbin/reboot
 ```
 
 ## Install local scripts/setup (as user)
@@ -96,10 +90,8 @@ cd ~/.bin
 ./mounting crypt
 # again, ssh agent not configured
 
-# Init local scripts
-./csv-processing --install
-./syncing --install
-systemctl start syncing@enck.service
+git-sub
+./sync --install
 ```
 
 ## Locking permissions

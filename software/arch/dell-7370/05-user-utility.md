@@ -65,7 +65,7 @@ sudo systemctl enable pcscd.service
 sudo systemctl start pcscd.service
 ```
 
-Follow instructions from [here](https://wiki.archlinux.org/index.php/Dell_Latitude_7370)
+Follow instructions from [here](https://wiki.archlinux.org/index.php/Common_Access_Card)
 
 ## Icons
 

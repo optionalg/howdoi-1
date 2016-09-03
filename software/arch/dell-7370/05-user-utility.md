@@ -67,6 +67,12 @@ sudo systemctl start pcscd.service
 
 Follow instructions from [here](https://github.com/enckse/howdoi/blob/master/software/chrome/dod-certs.md)
 
+## Icons
+
+```
+pacman -S python python-pip python-gobject
+```
+
 ## suspend/resume
 
 IF system doesn't work (e.g. systemd upgrade 229 -> 230)

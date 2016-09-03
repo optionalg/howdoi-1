@@ -5,6 +5,7 @@
 ```
 su enck
 cd ~
+mkdir workspace
 rm .bash*
 ```
 
@@ -65,14 +66,21 @@ mkdir Downloads
 
 # Verify host key for sync service (later)
 ssh sync
+```
 
-# Setup git config items
-git config --global core.excludesfiles ~/.config/.gitignore
-git config --global push.default simple
-git config --global core.editor "vim"
-git config --global user.name "<name>"
-git config --global user.email "<email>"
-git config --global core.autocrlf input
+## Setup symlinks
+
+```
+cd ~
+mkdir -p ~/.cache
+mkdir -p ~/.config
+mkdir -p ~/.config/hexchat
+mkdir -p ~/.cache/dmenu_urls
+ln -s $HOME/.synced/configs/.gitconfig .gitconfig
+ln -s $HOME/.synced/configs/urls/suite.index $HOME/.cache/dmenu_urls/
+ln -s $HOME/.synced/configs/urls/urls.index $HOME/.cache/dmenu_urls/
+ln -s $HOME/.synced/configs/servlist $HOME/.config/hexchat/
+dmenu_urls --rebuild
 ```
 
 ## Make sure networking is set/utils available

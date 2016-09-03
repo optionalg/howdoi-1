@@ -120,6 +120,13 @@ initrd /initramfs-linux.img
 options cyrptdevice=UUID=</dev/nvm0n1pX UUID>:vg0 root=/dev/mapper/vg0-root quiet rw
 ```
 
+```
+vim /boot/loader/loader.conf
+---
+# uncomment
+timeout 3
+```
+
 
 ## Close up shop and do reboot into installed system
 ```

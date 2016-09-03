@@ -80,6 +80,8 @@ ln -s $HOME/.synced/configs/.gitconfig .gitconfig
 ln -s $HOME/.synced/configs/urls/suite.index $HOME/.cache/dmenu_urls/
 ln -s $HOME/.synced/configs/urls/urls.index $HOME/.cache/dmenu_urls/
 ln -s $HOME/.synced/configs/servlist $HOME/.config/hexchat/
+sudo rm /etc/hosts
+sudo ln -s ~/.synced/configs/hosts /etc/hosts
 dmenu_urls --rebuild
 ```
 

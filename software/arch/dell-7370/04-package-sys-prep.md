@@ -24,7 +24,9 @@ sudo systemctl enable iptables
 ```
 cd ~
 mkdir -p $HOME/.cache/helper_cache
-helper_cache rebuild
+touch $HOME/.cache/helper_cache/tmp
+cd ~/.bin
+./helper_cache rebuild
 ```
 
 Reboot

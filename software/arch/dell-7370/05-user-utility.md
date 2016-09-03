@@ -2,7 +2,7 @@
 
 ## Necessary packages
 ```
-sudo pacman -S keepassx2 bash-completion rpmextract gconf arch-install-scripts wget ntp tree hexchat sqlitebrowser vlc
+sudo pacman -S keepassx2 bash-completion rpmextract gconf arch-install-scripts wget ntp tree hexchat vlc
 ```
 
 ## Bash auto-complete
@@ -12,16 +12,18 @@ sudo ln -s /home/enck/.bin/autocomplete/* /usr/share/bash-completion/completions
 
 ## Workspace/container setup
 ```
-sudo mkdir /opt/workspace
-chown enck:enck /opt/workspace
-sudo mkdir /opt/workspace/containers
-cd /opt/workspace/containers
-sudo mkdir template
-sudo pacstrap -i -c -d template/ base
-cd ~
-mkdir /opt/workspace/container-bin
-mkdir /opt/workspace/shared
-ln -s /opt/workspace/shared/ workspace
+sudo su
+cd /var/lib/machines
+mkdir new
+sudo pacstrap -i -c -d new/ base
+mkdir /opt/shared
+chown enck:enck /opt/shared
+mkdir -p /etc/systemd/nspawn
+vim /etc/systemd/nspawn/new.nspawn
+---
+[Files]
+Bind=/opt/shared
+Bind=/var/cache/pacman
 ```
 
 
@@ -29,7 +31,8 @@ ln -s /opt/workspace/shared/ workspace
 ```
 sudo mkdir -p /opt/google
 sudo mkdir -p /opt/google/chrome
-helper_cache setup-chrome
+chown -R enck:enck /opt/google/
+setup-chrome
 ```
 
 ## NTP
@@ -64,3 +67,17 @@ sudo systemctl start pcscd.service
 
 Follow instructions from [here](https://github.com/enckse/howdoi/blob/master/software/chrome/dod-certs.md)
 
+## suspend/resume
+
+IF system doesn't work (e.g. systemd upgrade 229 -> 230)
+```
+sudo vim /etc/systemd/login.conf
+---
+# set the following
+HandleLidSwitchDocked=ignore
+LidSwitchIgnoreInhibited=yes
+```
+
+## machinectl
+
+Follow [this](https://github.com/enckse/howdoi/blob/master/software/containers/init-nspawn.md)

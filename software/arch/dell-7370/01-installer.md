@@ -10,7 +10,7 @@ systemctl start dhcpcd.service
 ## Partitioning
 cgdisk /dev/nvme0n1
 ```
-1 500MB EFI partition # hex ef00
+1 1GB EFI partition # hex ef00
 2 100% size partiton 
 ```
 
@@ -35,7 +35,7 @@ lvcreate -l +100%FREE vg0 --name root
 
 ## File systems on LUKS partition(s) 
 ```
-mkfs.ext4 /dev/mapper/vg0-root
+mkfs.btrfs /dev/mapper/vg0-root
 mkswap /dev/mapper/vg0-swap
 ```
 
@@ -96,7 +96,8 @@ passwd
 ```
 vim /etc/mkinitcpio.conf
 ---
-# MODULES - add 'ext4'
+# if you want keyboard :/
+# MODULES - add 'i8042'
 # HOOKS add 'encrypt' and 'lvm2' before 'filesystems'
 ```
 
@@ -116,7 +117,7 @@ vim /boot/loader/entries/arch-encrypted.conf
 title Arch Linux
 linux /vmlinuz-linux
 initrd /initramfs-linux.img
-options cyrptdevice=UUID=</dev/nvm0n1pX UUID>:vg0 root=/dev/mapper/vg0-root quiet rw ipv6.disable_ipv6=1
+options cyrptdevice=UUID=</dev/nvm0n1pX UUID>:vg0 root=/dev/mapper/vg0-root quiet rw
 ```
 
 

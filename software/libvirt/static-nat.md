@@ -7,7 +7,7 @@ Assumes using dnsmasq and ebtables for NAT'd networking on child VMs on the host
 ```
 vim /etc/dnsmasq.conf
 ---
-interface=name
+interface=host-interface-name
 # or listen-address=ip
 # and
 bind-interfaces
@@ -21,7 +21,7 @@ net-edit default
 
 * add an entry after the dhcp/range path
 ```
-<host mac='mac-address' name='vm-name' ip='static-ip' />
+<host mac='vm-mac-address' name='vm-name' ip='static-ip' />
 ```
 
 * back to 'virsh' session
@@ -37,4 +37,5 @@ reboot
 
 # References
 [0] - http://wiki.libvirt.org/page/Libvirtd_and_dnsmasq
+
 [1] - http://www.cyberciti.biz/faq/linux-kvm-libvirt-dnsmasq-dhcp-static-ip-address-configuration-for-guest-os/

@@ -15,7 +15,7 @@ mkswap /dev/sdX2
 
 ## Mounting file systems
 ```
-mount /dev/sdX1
+mount /dev/sdX1 /mnt
 swapon /dev/sdX2
 ```
 

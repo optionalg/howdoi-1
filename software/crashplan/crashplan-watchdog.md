@@ -79,8 +79,9 @@ Type=oneshot
 ExecStart=/opt/crashplan-watcher
 ```
 
-enable
+set and enable
 ```
+chmod u+x /opt/crashplan-watcher
 systemctl enable crashplan-watchdog.timer
 systemctl start crashplan-watchdog.timer
 ```

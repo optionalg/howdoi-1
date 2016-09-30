@@ -41,33 +41,4 @@ rm -rf /opt/crashplan/log
 ln -s /opt/containers/logs/cp /opt/crashplan/log
 ```
 
-Integrate with systemd
-```
-vim /usr/lib/systemd/system/crashplan.service
----
-[Unit]
-Description=CrashPlan Backup Engine
-After=network.target
-
-[Service]
-
-Type=forking
-PIDFile=/opt/crashplan/CrashPlanEngine.pid
-EnvironmentFile=/opt/crashplan/bin/run.conf
-
-WorkingDirectory=/opt/crashplan
-
-ExecStart=/opt/crashplan/bin/CrashPlanEngine start
-ExecStop=/opt/crashplan/bin/CrashPlanEngine stop
-
-[Install]
-WantedBy=multi-user.target
-```
-
-Enable the service
-```
-systemctl enable crashplan.service
-systemctl start crashplan.service
-```
-
 Install [watchdog](https://github.com/enckse/howdoi/blob/master/software/crashplan/crashplan-watchdog.md) to '/opt/crashplan-watcher' and enable in crontab

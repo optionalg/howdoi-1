@@ -3,13 +3,12 @@ USB auto zero/format
 
 ```
 #!/bin/bash
-"Provides a script to monitor for USB disk drives to
-1. wipe
-2. partition (label)
-3. format
+# Provides a script to monitor for USB disk drives to
+# 1. wipe
+# 2. partition (label)
+# 3. format
+# when they are plugged in (keeping track of disks it has already done)
 
-when they are plugged in (keeping track of disks it has already done)
-"
 MATCH="/dev/disk/by-id/usb-*"
 STORE="/tmp/usb-formatter.cache"
 TMP_STORE="/tmp/usb-formatter.tmp"
@@ -56,7 +55,8 @@ function run()
         do_work="true"
     fi
     if [ ! -z "$do_work" ]; then
-        echo "found disks to format"
+        now=$(date +%Y-%m-%dT%H.%M.%S)
+        echo "found disks to format ($now)"
         proc $@
     fi
     if [ $4 -eq 0 ]; then

@@ -106,7 +106,7 @@ pacman -S grub
 vim /etc/default/grub
 ---
 # append to GRUB_CMDLINE_LINUX
-cryptdevice=UUID=</dev/sdX1>:vg0
+cryptdevice=UUID=</dev/sdX2>:vg0
 ```
 
 ```

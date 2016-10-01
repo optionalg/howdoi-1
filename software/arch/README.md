@@ -9,7 +9,4 @@ Installing arch on various system and/or with various settings and/or various co
 
 [Mainline kernel](https://github.com/enckse/howdoi/blob/master/software/arch/mainline.md)
 
-# Installs
-[T450s](https://github.com/enckse/howdoi/blob/master/software/arch/Thinkpad-T450s/README.md)
-
-[RPi2](https://github.com/enckse/howdoi/blob/master/software/arch/RPi2/README.md)
+[Linode](https://github.com/enckse/howdoi/blob/master/software/arch/linode.md)

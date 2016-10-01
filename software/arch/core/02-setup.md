@@ -51,14 +51,13 @@ Name=<adapter>
 [Network]
 DHCP=ipv4
 ```
-
 ```
 systemctl enable systemd-networkd
 systemctl enable systemd-resolved
 systemctl start systemd-networkd
 systemctl start systemd-resolved
 rm -f /etc/resolv.conf
-ln -s /usr/lib/systemd/resolv.conf /etc/resolv.conf
+ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
 ```
 
 ## LUKS unlock over ssh (dropbear/mkinitcpi-netconf)
@@ -166,7 +165,7 @@ systemctl enable iptables.service
 
 containers
 ```
-pacman -S screen arch-install-scripts
+pacman -S arch-install-scripts
 mkdir -p /etc/systemd/nspawn
 ```
 
@@ -175,12 +174,13 @@ Follow [this](https://github.com/enckse/howdoi/blob/master/software/containers/i
 link nspawn files
 ```
 # for each file in /opt/core/systemd-nspawn
-ln -s /opt/core/systemd_nspawn/<file> /etc/systemd/nspawn/<name>.nspawn
+ln -s /opt/core/systemd-nspawn/<file> /etc/systemd/nspawn/<name>.nspawn
+rm -f /etc/systemd/system/systemd-nspawn\@.service.d/override.conf
+ln -s /opt/core/systemd-nspawn/nspawn.override /etc/systemd/system/systemd-nspawn\@.service.d/override.conf
 ```
 
 helpers
 ```
-cat /opt/core/systemd_nspawn/new.template > /var/lib/machines/new.template
 curl "https://raw.githubusercontent.com/enckse/home/master/.bin/machinectl-helper" > /usr/local/bin/machinectl-helper
 chmod u+x /usr/local/bin/machinectl-helper
 ```

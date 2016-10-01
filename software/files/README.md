@@ -9,4 +9,4 @@ files
 
 [Convert cbr/cbz?](https://github.com/enckse/howdoi/blob/master/software/files/convert-cbz-cbr.md)
 
-[Monitor for USB disks and auto zero/format?](https://github.com/enckse/howdoi/blob/master/software/files/usb-auto-wipe-format.md)
+[Monitor for USB disks and auto zero/format?](https://github.com/enckse/usb-auto-formatter)

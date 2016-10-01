@@ -30,53 +30,102 @@ mdadm --detail --scan >> /etc/mdadm.conf
 mdadm --assemble --scan
 ```
 
-Make the file system
-```
-mkfs.ext4 /dev/md0
-```
-
-Create dir structure
 ```
 mkdir -p /mnt/Storage
 mkdir -p /mnt/Staging
 mkdir -p /mnt/Archive
 ```
 
-Setup other disks (single partition)
-```
-fdisk /dev/sdXX # and YY
-mkfs.ext4 /dev/sdXX # and YY
-```
-
-Setup fstab
-```
-vim /etc/fstab
----
-# /dev/md0 from by-uuid
-UUID=<uuid>     /mnt/Storage    ext4    defaults    0   0
-
-# /dev/sdXX from by-uuid
-UUID=<uuid>     /mnt/Archive    ext4    defaults    0   0
-
-# /dev/sdYY from by-uuid
-UUID=<uuid>     /mnt/Staging    ext4    defaults    0   0
-```
-
-```
-mount -a
-cd /mnt/Archive # Staging/Storage
-rm -rf lost+found
-```
-
-Restart
+follow the addendum for storage, reboot after
 ```
 /sbin/reboot
 ```
 
 ## Make sure networking/dhcp (wired) is available
 ```
-systemctl enable dhcpcd@<adapter>.service
-systemctl start dhcpcd@<adapter>.service
+vim /etc/systemd/network/wired.network
+---
+[Match]
+Name=<adapter>
+
+[Network]
+DHCP=ipv4
+```
+
+```
+systemctl enable systemd-networkd
+systemctl enable systemd-resolved
+systemctl start systemd-networkd
+systemctl start systemd-resolved
+rm -f /etc/resolv.conf
+ln -s /usr/lib/systemd/resolv.conf /etc/resolv.conf
+```
+
+## LUKS unlock over ssh (dropbear/mkinitcpi-netconf)
+
+We need a user now...
+```
+useradd -m -s /bin/bash enck
+passwd enck
+```
+
+```
+pacman -S sudo
+usermod -G wheel enck
+visudo
+#uncomment %wheel ALL=(ALL) ALL
+```
+
+```
+pacman -S wget base-devel
+cd /opt
+wget https://aur.archlinux.org/cgit/aur.git/snapshot/mkinitcpio-netconf.tar.gz
+wget https://aur.archlinux.org/cgit/aur.git/snapshot/mkinitcpio-dropbear.tar.gz
+wget https://aur.archlinux.org/cgit/aur.git/snapshot/mkinitcpio-utils.tar.gz
+tar xf mkinitcpio-netconf.tar.gz
+tar xf mkinitcpio-dropbear.tar.gz
+tar xf mkinitcpio-utils.tar.gz
+rm -f *.tar.gz
+chown -R enck:enck mkinitcpio*
+```
+
+```
+su enck
+cd mkinitcpio-netconf
+makepkg -sri
+cd ../mkinitcpio-dropbear
+makepkg -sri
+cd ../mkinitcpio-utils
+makepkg -sri
+exit
+```
+
+need to move our pub key onto the system
+```
+cp <pub_key> /etc/dropbear/root_key
+```
+
+```
+vim /etc/mkinitcpio.conf
+---
+# HOOKS change 'encrypt' 'encryptssh' and add 'netconf' and 'dropbear' before 'encryptssh'
+```
+
+```
+mkinitcpio -p linux
+```
+
+```
+vim /etc/default/grub
+---
+# yes...eth0 not your interface name...it doesn't match
+# append to GRUB_CMDLINE_LINUX 'ip=:::::eth0:dhcp'
+```
+
+update bootloader and reboot...
+```
+grub-mkconfig -o /boot/grub/grub.cfg
+reboot
 ```
 
 ## Configure ssh

@@ -76,6 +76,15 @@ visudo
 ```
 
 ```
+su enck
+cd ~
+mkdir .ssh
+chmod 700 .ssh
+# copy pub key
+chmod 600 .ssh/authorized_keys
+exit
+
+```
 pacman -S wget base-devel
 cd /opt
 wget https://aur.archlinux.org/cgit/aur.git/snapshot/mkinitcpio-netconf.tar.gz

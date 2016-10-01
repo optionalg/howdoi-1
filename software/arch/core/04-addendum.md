@@ -42,5 +42,3 @@ reboot
 rm -rf /mnt/Archive/lost+found
 rm -rf /mnt/Staging/lost+found
 ```
-
-Re-sync

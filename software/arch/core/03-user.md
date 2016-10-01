@@ -1,19 +1,5 @@
 # Root login/post install reboot
 
-## Setup a user
-```
-useradd -m -s /bin/bash enck
-passwd enck
-```
-
-## Setup user sudo'ing for wheel, add user to wheel
-```
-pacman -S sudo
-usermod -G wheel enck
-visudo
-#uncomment %wheel ALL=(ALL) ALL
-```
-
 ## Cleaning up from install
 ```
 pacman -Sc

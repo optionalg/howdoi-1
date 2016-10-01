@@ -83,6 +83,7 @@ chmod 700 .ssh
 # copy pub key
 chmod 600 .ssh/authorized_keys
 exit
+```
 
 ```
 pacman -S wget base-devel

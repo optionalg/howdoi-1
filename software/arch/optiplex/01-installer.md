@@ -5,7 +5,7 @@
 cgdisk /dev/sdX
 ```
 1 500MB EFI partition # hex ef00
-3 100% size partiton 
+2 100% size partiton 
 ```
 
 Make the necessary file systems

@@ -41,4 +41,4 @@ rm -rf /opt/crashplan/log
 ln -s /opt/containers/logs/cp /opt/crashplan/log
 ```
 
-Install [watchdog](https://github.com/enckse/howdoi/blob/master/software/crashplan/crashplan-watchdog.md) to '/opt/crashplan-watcher' and enable in crontab
+Install [watchdog](https://github.com/enckse/crashplan-watchdog)

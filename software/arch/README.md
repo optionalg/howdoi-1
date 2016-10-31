@@ -3,8 +3,10 @@ Arch
 
 Installing arch on various system and/or with various settings and/or various configurations
 
-[Downgrade a package](https://github.com/enckse/howdoi/blob/master/software/arch/downgrade.md)
+[Downgrade a package](downgrade.md)
 
-[Mainline kernel](https://github.com/enckse/howdoi/blob/master/software/arch/mainline.md)
+[Mainline kernel](mainline.md)
 
-[Linode](https://github.com/enckse/howdoi/blob/master/software/arch/linode.md)
+[Linode](linode.md)
+
+[Luks+SSH](luks-ssh.md)

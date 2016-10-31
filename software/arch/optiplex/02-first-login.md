@@ -97,7 +97,7 @@ chown enck:enck -R /opt/workspace
 
 ## Configure nspawn
 
-Follow [this](https://github.com/enckse/howdoi/blob/master/software/containers/init-nspawn.md)
+Follow [this](../../containers/init-nspawn.md)
 ```
 curl https://raw.githubusercontent.com/enckse/home/master/.bin/machinectl-helper > /usr/local/bin/machinectl-helper
 chmod u+x /usr/local/bin/machinectl-helper

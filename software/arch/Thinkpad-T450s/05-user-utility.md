@@ -53,7 +53,7 @@ Enable wget
 sudo pacman -S wget
 ```
 
-Follow instructions from [here](https://github.com/enckse/howdoi/blob/master/software/chrome/dod-certs.md)
+Follow instructions from [here](../../chrome/dod-certs.md)
 
 ## File Management
 ```

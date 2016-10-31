@@ -144,7 +144,7 @@ pacman -S arch-install-scripts
 mkdir -p /etc/systemd/nspawn
 ```
 
-Follow [this](https://github.com/enckse/howdoi/blob/master/software/containers/init-nspawn.md) and either copy archived containers or recreate, make sure they boot
+Follow [this](../../containers/init-nspawn.md) and either copy archived containers or recreate, make sure they boot
 
 link nspawn files
 ```

@@ -86,4 +86,4 @@ LidSwitchIgnoreInhibited=yes
 
 ## machinectl
 
-Follow [this](https://github.com/enckse/howdoi/blob/master/software/containers/init-nspawn.md)
+Follow [this](../../containers/init-nspawn.md)

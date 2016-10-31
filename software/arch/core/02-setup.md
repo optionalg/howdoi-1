@@ -60,7 +60,7 @@ rm -f /etc/resolv.conf
 ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
 ```
 
-## LUKS unlock over ssh (dropbear/mkinitcpi-netconf)
+## user setup/ssh prep 
 
 We need a user now...
 ```
@@ -85,14 +85,9 @@ chmod 600 .ssh/authorized_keys
 exit
 ```
 
-# luks + ssh setup
+## luks + ssh setup
 
 follow [this](../luks-ssh.md)
-
-
-```
-mkinitcpio -p linux
-```
 
 ```
 vim /etc/default/grub

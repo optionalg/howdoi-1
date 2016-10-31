@@ -24,6 +24,8 @@ tar xf tinyssh.tar.gz
 tar xf ucspi-tcp.tar.gz
 rm -f *.tar.gz
 chown -R enck:enck mkinitcpio*
+chown -R enck:enck tinyssh/
+chown -R enck:enck ucspi-tcp/
 ```
 
 ```
@@ -57,4 +59,9 @@ vim /etc/mkinitcpio.conf
 vim /boot/loader/entries/arch-encrypted.conf
 ---
 # add: ip=:::::eth0:dhcp
+```
+
+rebuild
+```
+mkinitcpio -p linux
 ```

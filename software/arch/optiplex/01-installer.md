@@ -97,7 +97,7 @@ passwd
 ```
 vim /etc/mkinitcpio.conf
 ---
-# MODULES - add 'ext4'
+# MODULES - add 'ext4', 'uas', and 'hid-generic'
 # HOOKS add 'encrypt' and 'lvm2' before 'filesystems'
 ```
 

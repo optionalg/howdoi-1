@@ -85,40 +85,10 @@ chmod 600 .ssh/authorized_keys
 exit
 ```
 
-```
-pacman -S wget base-devel
-cd /opt
-wget https://aur.archlinux.org/cgit/aur.git/snapshot/mkinitcpio-netconf.tar.gz
-wget https://aur.archlinux.org/cgit/aur.git/snapshot/mkinitcpio-dropbear.tar.gz
-wget https://aur.archlinux.org/cgit/aur.git/snapshot/mkinitcpio-utils.tar.gz
-tar xf mkinitcpio-netconf.tar.gz
-tar xf mkinitcpio-dropbear.tar.gz
-tar xf mkinitcpio-utils.tar.gz
-rm -f *.tar.gz
-chown -R enck:enck mkinitcpio*
-```
+# luks + ssh setup
 
-```
-su enck
-cd mkinitcpio-netconf
-makepkg -sri
-cd ../mkinitcpio-dropbear
-makepkg -sri
-cd ../mkinitcpio-utils
-makepkg -sri
-exit
-```
+follow [this](../luks-ssh.md)
 
-need to move our pub key onto the system
-```
-cp <pub_key> /etc/dropbear/root_key
-```
-
-```
-vim /etc/mkinitcpio.conf
----
-# HOOKS change 'encrypt' 'encryptssh' and add 'netconf' and 'dropbear' before 'encryptssh'
-```
 
 ```
 mkinitcpio -p linux

@@ -1,5 +1,5 @@
 Drives
 ======
 
-[See drive power-on-hours?](https://github.com/enckse/howdoi/blob/master/software/drives/power-on-hours.md)
+[See drive power-on-hours?](power-on-hours.md)
 

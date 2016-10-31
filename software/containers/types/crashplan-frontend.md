@@ -1,7 +1,7 @@
 CrashPlan (frontend) PRO
 ========================
 
-* Perform the same steps as those for the [backend](https://github.com/enckse/howdoi/blob/master/software/containers/types/crashplan-backend.md), stopping after CrashPlan's installer has run
+* Perform the same steps as those for the [backend](crashplan-backend.md), stopping after CrashPlan's installer has run
 * Additionally do the following to connect to the backend (which is headless)
 
 Additional packages

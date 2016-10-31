@@ -27,8 +27,8 @@ pacman -Syyu
 
 ## Systems
 ---
-[CrashPlan (backend)](https://github.com/enckse/howdoi/blob/master/software/containers/types/crashplan-backend.md)
+[CrashPlan (backend)](crashplan-backend.md)
 
-[CrashPlan (frontend)](https://github.com/enckse/howdoi/blob/master/software/containers/types/crashplan-frontend.md)
+[CrashPlan (frontend)](crashplan-frontend.md)
 
-[Media management](https://github.com/enckse/howdoi/blob/master/software/containers/types/media.md)
+[Media management](media.md)

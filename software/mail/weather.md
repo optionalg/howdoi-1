@@ -3,7 +3,7 @@ Weather
 
 Sending the weather forecast (to myself)
 
-Create a script to execute (e.g. [here](https://github.com/enckse/howdoi/blob/master/software/containers/types/media.md))
+Create a script to execute (e.g. [here](../containers/types/media.md))
 
 Using ssmtp to send it
 ```

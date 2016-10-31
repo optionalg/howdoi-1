@@ -53,7 +53,7 @@ Enable wget
 sudo pacman -S wget
 ```
 
-Follow instructions from [here](../../chrome/dod-certs.md)
+Follow the arch wiki about DoD Certs/CAC Reader
 
 ## File Management
 ```

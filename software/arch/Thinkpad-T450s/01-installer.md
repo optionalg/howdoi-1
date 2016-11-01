@@ -1,67 +1,60 @@
-# Arch Install (T450s)
+# Arch Install (Dell 7370)
 ---
 
-Installer commands for installing to UEFI on a Thinkpad T450s with LUKS on single root partition
+## Start networking
+```
+systemctl start dhcpcd.service
+
+```
 
 ## Partitioning
-cgdisk /dev/sdX
+cgdisk /dev/sdb
 ```
-1 100MB EFI partition # hex ef00
-2 250MB Boot partition 
-3 100% size partiton 
+1 1GB EFI partition # hex ef00
+2 100% size partiton 
 ```
 
 Make the necessary file systems
 ```
-mkfs.vfat -F32 /dev/sdX1
-mkfs.ext2 /dev/sdX2
+mkfs.vfat -F32 /dev/sdb1
 ```
 
 ## LUKS/Encryption setup 
 ```
-cryptsetup -c aes-xts-plain64 -y --use-random luksFormat /dev/sdX3
-cryptsetup luksOpen /dev/sdX3 luks
+cryptsetup -c aes-xts-plain64 --key-size 512 --hash sha512 -y --use-random luksFormat /dev/sdb2
+cryptsetup luksOpen /dev/sdb2 luks
 ```
 
 ## Volume setup for LUKS volumes
 ```
 pvcreate /dev/mapper/luks
-vgcreate vg0 /dev/mapper/luks
-lvcreate --size 8G vg0 --name swap
-lvcreate -l +100%FREE vg0 --name root
+vgcreate vg /dev/mapper/luks
+lvcreate --size 8G vg --name swap
+lvcreate -l +100%FREE vg --name root
 ```
 
 ## File systems on LUKS partition(s) 
 ```
-mkfs.ext4 /dev/mapper/vg0-root
-mkswap /dev/mapper/vg0-swap
+mkfs.btrfs /dev/mapper/vg-root
+mkswap /dev/mapper/vg-swap
 ```
 
 ## Mounting file systems
 ```
-mount /dev/mapper/vg0-root /mnt 
-swapon /dev/mapper/vg0-swap 
+mount /dev/mapper/vg-root /mnt 
+swapon /dev/mapper/vg-swap 
 mkdir /mnt/boot
-mount /dev/sdX2 /mnt/boot
-mkdir /mnt/boot/efi
-mount /dev/sdX1 /mnt/boot/efi
+mount /dev/sdb1 /mnt/boot
 ```
 
 ## Package installation (for install)
 ```
-pacstrap /mnt base grub-efi-x86_64 vim git efibootmgr
+pacstrap /mnt base vim git btrfs-progs
 ```
 
 ## Setup fstab
 ```
 genfstab -pU /mnt >> /mnt/etc/fstab
-```
-
-Edit and add a line for tmpfs
-```
-vim /mnt/etc/fstab
----
-tmpfs	/tmp	tmpfs	defaults,noatime,mode=1777	0	0
 ```
 
 ## Enter the installing system
@@ -103,7 +96,7 @@ passwd
 ```
 vim /etc/mkinitcpio.conf
 ---
-# MODULES - add 'ext4'
+# if you want keyboard :/
 # HOOKS add 'encrypt' and 'lvm2' before 'filesystems'
 ```
 
@@ -112,23 +105,27 @@ vim /etc/mkinitcpio.conf
 mkinitcpio -p linux
 ```
 
-## Grub
+## systemd-boot
 ```
-grub-install
+bootctl install
+```
 
 ```
-
-Edit grub command line
-```
-vim /etc/default/grub
+vim /boot/loader/entries/arch-encrypted.conf
 ---
-# Change  GRUB_CMDLINE_LINUX to GRUB_CMDLINE_LINUX="cryptdevice=/dev/sdX3:luks:allow-discards"
+title Arch Linux
+linux /vmlinuz-linux
+initrd /initramfs-linux.img
+options cryptdevice=UUID=</dev/sdb2 UUID>:vg root=/dev/mapper/vg-root quiet rw
 ```
 
-Make grub config
 ```
-grub-mkconfig -o /boot/grub/grub.cfg
+vim /boot/loader/loader.conf
+---
+# uncomment and change
+timeout 1
 ```
+
 
 ## Close up shop and do reboot into installed system
 ```

@@ -132,7 +132,7 @@ sudo ln -s /home/enck/.bin/locking /usr/local/bin/
 ## Setup the 'core' packages for wm/wireless/utilities/etc.
 ```
 # Make sure keys and cache are all clean/setup
-sudo pacman -S alsa-utils chromium feh i3 i3lock i3status dmenu gsfonts lxterminal p7zip pandoc unzip wpa_supplicant xautolock xorg-xdm network-manager-applet cbatticon volumeicon sshfs vinagre base-devel dlang
+sudo pacman -S alsa-utils chromium feh i3 i3lock i3status dmenu gsfonts lxterminal p7zip pandoc unzip wpa_supplicant xautolock xorg-xdm network-manager-applet cbatticon volumeicon sshfs vinagre base-devel dlang virt-manager
 
 # fonts
 sudo pacman -S ttf-liberation ttf-freefont ttf-arphic-uming ttf-baekmuk noto-fonts noto-fonts-cjk noto-fonts-emoji

@@ -12,7 +12,13 @@ pacman -S swt gsfonts
 
 Make sure to enable X (if in a container, requires X sharing on the host as well)
 ```
+# container
 export DISPLAY=:0
+```
+
+```
+# host
+xhost +local:
 ```
 
 As referenced below - ui_info file is found here

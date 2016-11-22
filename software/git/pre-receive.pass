@@ -11,7 +11,7 @@ newrev=$2
 refname=$3
 bad_file=0
 
-keys="({KEYS})"
+keys="(MY_KEYS)"
 key_count=$(echo "$keys" | sed -n -e 's/|/\n/p' | wc -l)
 while read oldrev newrev refname; do
     

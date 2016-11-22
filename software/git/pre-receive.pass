@@ -1,0 +1,55 @@
+#!/bin/bash
+# https://gist.github.com/hartfordfive/9670011
+
+TEMPDIR=`mktemp -d`
+
+echo "### checking gpg keys... ####"
+
+# See https://www.kernel.org/pub/software/scm/git/docs/githooks.html#pre-receive    
+oldrev=$1
+newrev=$2
+refname=$3
+bad_file=0
+
+keys="({KEYS})"
+key_count=$(echo "$keys" | sed -n -e 's/|/\n/p' | wc -l)
+while read oldrev newrev refname; do
+    
+    # Get the file names, without directory, of the files that have been modified
+    # between the new revision and the old revision
+    files=`git diff --name-only ${oldrev} ${newrev}`
+
+    # Get a list of all objects in the new revision
+    objects=`git ls-tree --full-name -r ${newrev}`
+
+    # Iterate over each of these files
+    for file in ${files}; do
+  
+        # Search for the file name in the list of all objects
+        object=`echo -e "${objects}" | egrep "(\s)${file}\$" | awk '{ print $3 }'`
+        
+        # If it's not present, then continue to the the next itteration
+        if [ -z ${object} ]; 
+        then 
+            continue; 
+        fi
+
+        # Otherwise, create all the necessary sub directories in the new temp directory
+        mkdir -p "${TEMPDIR}/`dirname ${file}`" &>/dev/null
+        # and output the object content into it's original file name
+        fname=$TEMPDIR/$file
+        git cat-file blob ${object} > $fname
+        res=$(gpg --batch --list-packets $fname 2>/dev/null | grep -E "$keys" | wc -l)
+        if [[ $res -ne $key_count ]]; then
+            gpg --batch --list-packets $fname
+            echo "ERROR: missing required signing keys ($file)"
+            bad_file=1
+        fi
+    done;
+done
+
+rm -rf ${TEMPDIR} &> /dev/null
+if [[ $bad_file -eq 1 ]]; then
+    exit 1
+fi
+

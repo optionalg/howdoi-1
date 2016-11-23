@@ -100,7 +100,7 @@ sudo ln -s ~/.vimrc /etc/vimrc
 sudo rm /etc/pacman.d/mirrorlist
 mkdir -p ~/.cache/hosted
 touch ~/.cache/hosted/mirrorlist
-sudo ln -s ~/.cache/hosted/mirrorlist /etc/pacman.d/mirrorlist
+sudo ln -s ~/.cache/hosted/mirrorlist /etc/pacman.d/mirrorlist.ranked
 .bin/dmenu_urls --rebuild
 .bin/dmenu_urls --suite-rebuild
 ```

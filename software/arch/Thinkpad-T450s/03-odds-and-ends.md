@@ -25,7 +25,7 @@ vim /etc/systemd/nspawn/new.nspawn
 Bind=/opt/shared
 Bind=/var/cache/pacman
 BindReadOnly=/etc/vimrc
-BindReadOnly=/etc/pacman.d/mirrorlist
+BindReadOnly=/etc/pacman.d/mirrorlist.ranked
 ```
 
 

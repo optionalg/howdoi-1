@@ -25,6 +25,12 @@ while read oldrev newrev refname; do
     # Iterate over each of these files
     for file in ${files}; do
   
+        # only ".gpg" files
+        echo $file | grep -q ".gpg$"
+        if [ $? -ne 0 ]; then
+            continue
+        fi
+
         # Search for the file name in the list of all objects
         object=`echo -e "${objects}" | egrep "(\s)${file}\$" | awk '{ print $3 }'`
         

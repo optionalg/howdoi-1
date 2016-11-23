@@ -19,6 +19,7 @@ pacstrap -i -c -d new/ base
 chown enck:enck /opt/shared
 mkdir -p /etc/systemd/nspawn
 
+```
 vim /etc/systemd/nspawn/new.nspawn
 ---
 [Files]
@@ -26,6 +27,13 @@ Bind=/opt/shared
 Bind=/var/cache/pacman
 BindReadOnly=/etc/vimrc
 BindReadOnly=/etc/pacman.d/mirrorlist.ranked
+BindReadOnly=/etc/pacman.conf
+```
+
+```
+vim /etc/pacman.conf
+---
+# for each repo, add Include=/etc/pacman.d/mirrorlist.ranked
 ```
 
 

@@ -24,6 +24,8 @@ vim /etc/systemd/nspawn/new.nspawn
 [Files]
 Bind=/opt/shared
 Bind=/var/cache/pacman
+Bind=/etc/vimrc
+Bind=/etc/pacman.d/mirrorlist
 ```
 
 

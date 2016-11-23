@@ -97,6 +97,10 @@ sudo rm /etc/hosts
 sudo ln -s ~/.synced/configs/hosts /etc/hosts
 sudo rm /etc/vimrc
 sudo ln -s ~/.vimrc /etc/vimrc
+sudo rm /etc/pacman.d/mirrorlist
+mkdir -p ~/.cache/hosted
+touch ~/.cache/hosted/mirrorlist
+sudo ln -s ~/.cache/hosted/mirrorlist /etc/pacman.d/mirrorlist
 .bin/dmenu_urls --rebuild
 .bin/dmenu_urls --suite-rebuild
 ```

@@ -14,6 +14,8 @@ Match exec "echo '%n' | grep -q -E '^(host1|host2)$'"
 
 * Proxy through
 ```
+vim ~/.ssh/config
+---
 Host proxy
     HostName proxy.example.com
     RequestTTY force

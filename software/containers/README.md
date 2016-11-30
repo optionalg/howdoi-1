@@ -8,3 +8,5 @@ containers
 [Simple sshd with systemd-nspawn](sshd-nspawn.md)
 
 [Init systemd-nspawn](init-nspawn.md)
+
+[Enable resolved fully](resolved.md)

@@ -40,12 +40,12 @@ Ctrl-A then M -> Init modem
 # ?
 # help
 # exit
-
 ```
 
 ```
 > exit
 ```
 
-[ubnt](https://help.ubnt.com/hc/en-us/articles/205202630-EdgeMAX-Connect-to-serial-console-port-default-settings)
-[arch wiki](https://wiki.archlinux.org/index.php/working_with_the_serial_console)
+* [ubnt](https://help.ubnt.com/hc/en-us/articles/205202630-EdgeMAX-Connect-to-serial-console-port-default-settings)
+
+* [arch wiki](https://wiki.archlinux.org/index.php/working_with_the_serial_console)

@@ -1,5 +1,3 @@
-# Arch Install (Dell 7370)
----
 
 ## Start networking
 ```

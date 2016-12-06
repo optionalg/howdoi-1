@@ -119,9 +119,23 @@ vim /boot/loader/entries/arch-encrypted.conf
 title Arch Linux
 linux /vmlinuz-linux
 initrd /initramfs-linux.img
-options cryptdevice=UUID=</dev/sdX UUID>:vg root=/dev/mapper/vg-root quiet rw 
+options cryptdevice=UUID=</dev/sdX2 UUID>:vg root=/dev/mapper/vg-root quiet rw 
 ```
 
+```
+cp /boot/loader/entries/arch-encrypted.conf /boot/loader/entries/arch-fallback.conf
+vim /boot/loader/entries/arch-fallback.conf
+---
+# change to
+title Arch Linux (fallback)
+initrd /initramfs-linux-fallback.img
+```
+
+```
+vim /boot/loader/loader.conf
+---
+default arch-encrypted
+```
 
 ## Close up shop and do reboot into installed system
 ```

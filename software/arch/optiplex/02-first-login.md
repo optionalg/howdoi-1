@@ -120,11 +120,3 @@ systemctl enable sshd
 systemctl start sshd
 ```
 
-## speaker
-
-```
-vim /etc/modprobe.d/nobeep.conf
----
-blacklist pcspkr
-```
-

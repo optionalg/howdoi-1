@@ -22,21 +22,21 @@ cryptsetup luksOpen /dev/sdX2 luks
 ## Volume setup for LUKS volumes
 ```
 pvcreate /dev/mapper/luks
-vgcreate vg0 /dev/mapper/luks
-lvcreate --size 32G vg0 --name swap
-lvcreate -l +100%FREE vg0 --name root
+vgcreate vg /dev/mapper/luks
+lvcreate --size 32G vg --name swap
+lvcreate -l +100%FREE vg --name root
 ```
 
 ## File systems on LUKS partition(s) 
 ```
-mkfs.ext4 /dev/mapper/vg0-root
-mkswap /dev/mapper/vg0-swap
+mkfs.btrfs /dev/mapper/vg-root
+mkswap /dev/mapper/vg-swap
 ```
 
 ## Mounting file systems
 ```
-mount /dev/mapper/vg0-root /mnt 
-swapon /dev/mapper/vg0-swap 
+mount /dev/mapper/vg-root /mnt 
+swapon /dev/mapper/vg-swap 
 mkdir /mnt/boot
 mount /dev/sdX1 /mnt/boot
 ```
@@ -49,13 +49,6 @@ pacstrap /mnt base vim git
 ## Setup fstab
 ```
 genfstab -pU /mnt >> /mnt/etc/fstab
-```
-
-Edit and add a line for tmpfs
-```
-vim /mnt/etc/fstab
----
-tmpfs	/tmp	tmpfs	defaults,noatime,mode=1777	0	0
 ```
 
 ## Enter the installing system
@@ -97,13 +90,22 @@ passwd
 ```
 vim /etc/mkinitcpio.conf
 ---
-# MODULES - add 'ext4', 'uas', and 'hid-generic'
+# MODULES - add 'uas' and 'hid-generic'
 # HOOKS add 'encrypt' and 'lvm2' before 'filesystems'
 ```
 
 ## Regen initrd 
 ```
+pacman -S btrfs-progs
 mkinitcpio -p linux
+```
+
+## Disable pcspkr
+
+```
+vim /etc/modprobe.d/nobeep.conf
+---
+blacklist pcspkr
 ```
 
 ## systemd-boot
@@ -117,7 +119,7 @@ vim /boot/loader/entries/arch-encrypted.conf
 title Arch Linux
 linux /vmlinuz-linux
 initrd /initramfs-linux.img
-options cyrptdevice=UUID=</dev/sdX UUID>:vg0 root=/dev/mapper/vg0-root quiet rw ipv6.disable_ipv6=1
+options cryptdevice=UUID=</dev/sdX UUID>:vg root=/dev/mapper/vg-root quiet rw 
 ```
 
 

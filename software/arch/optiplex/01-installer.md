@@ -134,6 +134,7 @@ initrd /initramfs-linux-fallback.img
 ```
 vim /boot/loader/loader.conf
 ---
+timeout 3
 default arch-encrypted
 ```
 

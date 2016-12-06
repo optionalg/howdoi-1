@@ -57,3 +57,10 @@ systemctl enable sshd
 systemctl start sshd
 ```
 
+```
+su enck
+mkdir .ssh
+chmod 700 .ssh
+# copy pubkey
+chmod 600 .ssh/authorized_keys
+```

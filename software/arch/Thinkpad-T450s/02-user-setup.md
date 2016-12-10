@@ -123,7 +123,9 @@ cd ~/.bin
 # again, ssh agent not configured
 
 git submodule update --init
-./syncing --install
+systemctl --user enable sync.timer
+systemctl --user enable ssh-agent.service
+systemctl --user enable gpg-agent.service
 ```
 
 ## Locking permissions
@@ -150,7 +152,7 @@ sudo systemctl enable xdm.service
 
 ## Setup iptables
 ```
-sudo ln -s $HOME/.bin/sys/iptables.rules /etc/iptables/iptables.rules
+sudo ln -s $HOME/.config/firewall/iptables.rules /etc/iptables/iptables.rules
 sudo systemctl enable iptables
 ```
 

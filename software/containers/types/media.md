@@ -46,6 +46,7 @@ status_file=${mail_out}status.log
 today=$(date +%Y-%m-%d)
 located=${mail_out}feed.weather/
 weather_ran=/var/tmp/weather-$today
+ind="wrapper"
 function report()
 {
     if [ ! -z "$1" ]; then
@@ -76,6 +77,7 @@ case $1 in
     "weather")
         res=$(get-weather 2>&1)
         report "$res"
+        echo $res | systemd-cat -t $ind
         ;;
     "rss")
         daily="-v"
@@ -91,6 +93,7 @@ case $1 in
         for r in $(r2e list | grep $daily -E "$DAILY_FEEDS" | grep $bi -E "$BI_DAILY_FEEDS" | cut -d ":" -f 1); do
             res=$(r2e run $r 2>&1)
             report $res
+            echo $res | systemd-cat -t $ind
         done
         ;;
 esac

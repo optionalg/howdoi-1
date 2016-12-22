@@ -13,11 +13,11 @@ DHCP=ipv4
 
 ```
 systemctl enable systemd-networkd
-systemctl enable systemd-resolved
 systemctl start systemd-networkd
-systemctl start systemd-resolved
-rm -f /etc/resolv.conf
-ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
+vim /etc/resolv.conf
+---
+nameserver <local nameserver>
+nameserver <public nameservers...>
 ```
 
 ## Setup a user

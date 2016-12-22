@@ -6,12 +6,6 @@ useradd -m -s /bin/bash enck
 passwd enck
 ```
 
-## Make sure networking/dhcp (wired) is available
-```
-systemctl enable dhcpcd.service
-systemctl start dhcpcd.service
-```
-
 ## Setup user sudo'ing for wheel, add user to wheel
 ```
 pacman -S sudo
@@ -110,8 +104,7 @@ sudo ln -s ~/.cache/hosted/mirrorlist /etc/pacman.d/mirrorlist.ranked
 sudo pacman -Syyu
 sudo pacman -Sc
 sudo pacman-key --refresh-key
-sudo pacman -S networkmanager perl-uri
-sudo systemctl enable NetworkManager.service
+sudo pacman -S perl-uri
 exit
 reboot
 ```

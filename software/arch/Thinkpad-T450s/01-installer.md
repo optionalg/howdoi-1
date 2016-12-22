@@ -1,10 +1,4 @@
 
-## Start networking
-```
-systemctl start dhcpcd.service
-
-```
-
 ## Partitioning
 cgdisk /dev/sdb
 ```
@@ -124,6 +118,12 @@ vim /boot/loader/loader.conf
 timeout 1
 ```
 
+## prep for first boot
+
+```
+pacman -S networkmanager
+systemctl enable NetworkManager
+```
 
 ## Close up shop and do reboot into installed system
 ```

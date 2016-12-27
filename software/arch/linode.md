@@ -2,6 +2,11 @@ Linode
 ===
 How to install a fully custom and LUKS'd image on linode.
 
+will result in a bootable system though grub will not point to the "right" location, so this grub command is needed
+```
+configfile (hd0,1)/grub/grub.cfg
+```
+
 # Bootstrap
 
 1. You will need 2 disk images (1 for bootstrap, 1 for actual install as unformatted/raw)

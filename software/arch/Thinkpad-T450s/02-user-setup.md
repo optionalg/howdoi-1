@@ -27,9 +27,7 @@ rm .bash*
 ```
 sudo mkdir /mnt/Storage
 sudo mkdir /mnt/usb
-sudo mkdir /mnt/crypt
 sudo chown enck:enck /mnt/Storage
-sudo chown enck:enck /mnt/crypt
 ```
 
 ## Get initial bootstrapping data
@@ -40,14 +38,11 @@ sudo pacman -S openssh rsync exfat-utils
 
 * Need to get the copied data locally (via usb from another machine)
 
-## Bootstrapping crypt
+## Bootstrapping user config(s)
 ```
 mount /dev/<usb> /mnt/usb
 mv /mnt/usb/.synced ~
 chown -R enck:enck ~/.synced
-cp ~/.synced/crypt.img /tmp/crypt.img
-sudo cryptsetup luksOpen --readonly /tmp/crypt.img crypt-tmp
-sudo mount /dev/mapper/crypt-tmp /mnt/crypt
 umount /mnt/usb
 ```
 
@@ -68,8 +63,6 @@ git remote add origin git@github.com:enckse/home.git
 cd ~
 mkdir Downloads
 mkdir .tmp
-.bin/mounting crypt
-# there may be warnings about ssh-agent (not configured yet!)
 
 # Verify host key for sync service (later)
 ssh sync
@@ -112,7 +105,6 @@ reboot
 ## Install local scripts/setup (as user)
 ```
 cd ~/.bin
-./mounting crypt
 # again, ssh agent not configured
 
 git submodule update --init

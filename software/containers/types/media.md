@@ -176,6 +176,5 @@ ssh-keygen -t rsa -b 4096 -C "<email>"
 Create a link (as user)
 ```
 cd ~
-ln -s ${MNT_STORAGE}/Home/Synced Sync
 ln -s ${MNT_STORAGE}/Home/Host Host
 ```

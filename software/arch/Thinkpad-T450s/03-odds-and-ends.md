@@ -29,7 +29,7 @@ BindReadOnly=/etc/vimrc
 BindReadOnly=/etc/pacman.d/mirrorlist.ranked
 BindReadOnly=/etc/pacman.conf
 BindReadOnly=/home/enck.gitconfig:/root/.gitconfig
-BindReadOnly=/home/enck/.config/.gitignore
+BindReadOnly=/home/enck/.config/.gitexclude
 ```
 
 ```

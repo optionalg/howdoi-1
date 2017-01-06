@@ -1,7 +1,7 @@
 freeradius
 ===
 
-how to get start connecting into freeradius python modules (Arch Linux)
+how to get start connecting into freeradius python modules (Arch Linux). From my investigating and understanding the actual authorize and authenticate steps can NOT be undertaken in python HOWEVER they can enhance/add to existing operations
 
 need python to be able to find the module(s) you define
 ```
@@ -79,3 +79,12 @@ radiusd -X
 ```
 
 hitting things like missing methods (e.g. the example doesn't have authenticate as a method as of this writing) should be pretty clear
+
+## module
+
+sending reply/config in authorize/authenticate
+```
+reply = ( ('key', 'value'), ('key2', 'value'), )
+config = ( ('ckey', 'value'), ('ckey2', 'value'), )
+return (radiusd.RLM_MODULE_OK, reply, config)
+```

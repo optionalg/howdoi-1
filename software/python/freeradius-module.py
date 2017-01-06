@@ -73,3 +73,9 @@ authenticate {
 ...rest of config
 ```
 
+troubleshoot
+```
+radiusd -X
+```
+
+hitting things like missing methods (e.g. the example doesn't have authenticate as a method as of this writing) should be pretty clear

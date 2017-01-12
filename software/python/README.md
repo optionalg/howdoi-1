@@ -5,4 +5,4 @@ python
 
 [Understand struct unpack formats?](unpack-with-struct.md)
 
-[freeradius module?](freeradius-module.md)
+[freeradius module?](https://github.com/epiphyte/freeradius)

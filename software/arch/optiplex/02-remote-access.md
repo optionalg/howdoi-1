@@ -67,8 +67,8 @@ chmod 700 .ssh
 chmod 600 .ssh/authorized_keys
 ```
 
-setup [rank-mirrors](https://github.com/epiphyte/rank-mirrors)
-setup [client](https://github.com/enckse/clients)
+* setup [rank-mirrors](https://github.com/epiphyte/rank-mirrors)
+* setup [client](https://github.com/enckse/clients)
 
 ```
 exit

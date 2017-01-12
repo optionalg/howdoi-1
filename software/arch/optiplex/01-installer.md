@@ -43,7 +43,7 @@ mount /dev/sdX1 /mnt/boot
 
 ## Package installation (for install)
 ```
-pacstrap /mnt base vim git
+pacstrap /mnt base vim git btrfs-progs
 ```
 
 ## Setup fstab
@@ -92,12 +92,6 @@ vim /etc/mkinitcpio.conf
 ---
 # MODULES - add 'uas' and 'hid-generic'
 # HOOKS add 'encrypt' and 'lvm2' before 'filesystems'
-```
-
-## Regen initrd 
-```
-pacman -S btrfs-progs
-mkinitcpio -p linux
 ```
 
 ## Disable pcspkr

@@ -58,6 +58,7 @@ arch-chroot /mnt /bin/bash
 
 ## Setup the clock
 ```
+rm -f /etc/localtime
 ln -s /usr/share/zoneinfo/<zone_info> /etc/localtime
 hwclock --systohc --utc
 ```

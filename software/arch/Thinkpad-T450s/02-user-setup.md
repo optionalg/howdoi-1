@@ -82,6 +82,8 @@ ln -s $HOME/.synced/configs/urls/urls.index $HOME/.cache/dmenu_urls/
 ln -s $HOME/.synced/configs/servlist $HOME/.config/hexchat/
 sudo rm /etc/hosts
 sudo ln -s ~/.synced/configs/hosts /etc/hosts
+sudo rm /etc/environment
+sudo ln -s ~/.synced/configs/sourced /etc/environment
 sudo rm /etc/vimrc
 sudo ln -s ~/.vimrc /etc/vimrc
 sudo rm /etc/pacman.d/mirrorlist
